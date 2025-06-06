@@ -74,7 +74,7 @@ const DonutChart = () => {
             transform="rotate(-90 50 50)"
           />
           <text x="50" y="45" fontFamily="sans-serif" fontSize="12" textAnchor="middle" fill="#4b5563">
-            Pass Rate
+            Aprovação
           </text>
           <text x="50" y="65" fontFamily="sans-serif" fontSize="18" fontWeight="bold" textAnchor="middle" fill="#1f2937">
             {passRate}%
@@ -87,21 +87,21 @@ const DonutChart = () => {
           <CheckCircle2 size={16} className="text-green-500 mr-2" />
           <div>
             <p className="text-sm font-medium text-gray-900">{data.passed}</p>
-            <p className="text-xs text-gray-500">Passed</p>
+            <p className="text-xs text-gray-500">Aprovado</p>
           </div>
         </div>
         <div className="flex items-center">
           <XCircle size={16} className="text-red-500 mr-2" />
           <div>
             <p className="text-sm font-medium text-gray-900">{data.failed}</p>
-            <p className="text-xs text-gray-500">Failed</p>
+            <p className="text-xs text-gray-500">Falha</p>
           </div>
         </div>
         <div className="flex items-center">
           <Clock size={16} className="text-amber-500 mr-2" />
           <div>
             <p className="text-sm font-medium text-gray-900">{data.pending}</p>
-            <p className="text-xs text-gray-500">Pending</p>
+            <p className="text-xs text-gray-500">Pendente</p>
           </div>
         </div>
       </div>

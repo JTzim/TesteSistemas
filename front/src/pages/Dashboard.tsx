@@ -25,10 +25,10 @@ const Dashboard: React.FC = () => {
       const response = await fetch('http://localhost:3000/countTest');
       const data = await response.json();
       setStats([
-        { title: 'Total Tests', value: data.totalTests || '0', icon:<ClipboardCheck size={24} className="text-blue-500" />},
-        { title: 'Failed Tests', value: data.failedTests || '0', icon: <AlertCircle size={24} className="text-red-500" />},
-        { title: 'Pending Tests', value: data.pendingTests || '0', icon: <Clock size={24} className="text-amber-500" />},
-        { title: 'Pass Rate', value: `${data.passRate}%` || '0%', icon: <Activity size={24} className="text-green-500" />},
+        { title: 'Total de Testes', value: data.totalTests || '0', icon:<ClipboardCheck size={24} className="text-blue-500" />},
+        { title: 'Falha de Testes', value: data.failedTests || '0', icon: <AlertCircle size={24} className="text-red-500" />},
+        { title: 'Testes Pendentes', value: data.pendingTests || '0', icon: <Clock size={24} className="text-amber-500" />},
+        { title: 'Taxa de Aprovação', value: `${data.passRate}%` || '0%', icon: <Activity size={24} className="text-green-500" />},
       ]);
     } catch (error) {
       console.error('Erro ao buscar estatísticas:', error);
@@ -41,20 +41,20 @@ const Dashboard: React.FC = () => {
 
 
   const recentActivity = [
-    { id: 1, user: 'Luana Martins', action: 'Updated test case', test: 'User Authentication', time: '10 minutes ago', status: 'passed' },
+    { id: 1, user: 'Luana Martins', action: 'Updated test case', test: 'User Authentication', time: '10 minutes ago', status: 'Aprovado' },
     { id: 2, user: 'Admin User', action: 'Created new project', test: 'Payment Processing API', time: '1 hour ago', status: 'pending' },
-    { id: 3, user: 'Beto Silva', action: 'Failed test case', test: 'Order Checkout', time: '2 hours ago', status: 'failed' },
-    { id: 4, user: 'Luana Martins', action: 'Updated test plan', test: 'User Profile Management', time: '3 hours ago', status: 'passed' },
-    { id: 5, user: 'Admin User', action: 'Added new tester', test: 'Carlos Mendes', time: '5 hours ago', status: 'pending' },
+    { id: 3, user: 'Beto Silva', action: 'Failed test case', test: 'Order Checkout', time: '2 hours ago', status: 'Falha' },
+    { id: 4, user: 'Luana Martins', action: 'Updated test plan', test: 'User Profile Management', time: '3 hours ago', status: 'Aprovado' },
+    { id: 5, user: 'Admin User', action: 'Added new tester', test: 'Carlos Mendes', time: '5 hours ago', status: 'Pendente' },
   ];
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'passed':
+      case 'Aprovado':
         return <CheckCircle2 size={16} className="text-green-500" />;
-      case 'failed':
+      case 'Falha':
         return <XCircle size={16} className="text-red-500" />;
-      case 'pending':
+      case 'Pendente':
         return <PauseCircle size={16} className="text-amber-500" />;
       default:
         return <Clock size={16} className="text-gray-500" />;

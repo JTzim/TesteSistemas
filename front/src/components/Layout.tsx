@@ -16,14 +16,14 @@ const Layout: React.FC = () => {
 
   const menuItems = [
     { path: '/dashboard', name: 'Dashboard', icon: <LayoutDashboard size={20} /> },
-    { path: '/projects', name: 'Projects', icon: <BookOpen size={20} /> },
-    { path: '/test-cases', name: 'Test Cases', icon: <ClipboardList size={20} /> },
-    { path: '/test-plans', name: 'Test Plans', icon: <FileSpreadsheet size={20} /> },
-    { path: '/reports', name: 'Reports', icon: <BarChart2 size={20} /> },
+    { path: '/projects', name: 'Projetos', icon: <BookOpen size={20} /> },
+    { path: '/test-cases', name: 'Casos de Teste', icon: <ClipboardList size={20} /> },
+    { path: '/test-plans', name: 'Planos de Teste', icon: <FileSpreadsheet size={20} /> },
+    { path: '/reports', name: 'Relatório', icon: <BarChart2 size={20} /> },
   ];
 
   if (isAdmin) {
-    menuItems.push({ path: '/users', name: 'Users', icon: <Users size={20} /> });
+    menuItems.push({ path: '/users', name: 'Usuários', icon: <Users size={20} /> });
   }
 
   return (
@@ -47,7 +47,7 @@ const Layout: React.FC = () => {
         <div className="flex items-center justify-between mb-10 pr-2">
           <div className="flex items-center">
             <ClipboardList className="h-8 w-8 text-blue-400" />
-            <span className="ml-2 text-xl font-bold">TestFlow</span>
+            <span className="ml-2 text-xl font-bold">TesteFlow</span>
           </div>
           <button 
             className="lg:hidden text-gray-300 hover:text-white" 
@@ -94,7 +94,7 @@ const Layout: React.FC = () => {
             className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-slate-700 rounded-lg hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             <LogOut size={16} className="mr-2" />
-            Logout
+            Encerrar Seção
           </button>
         </div>
       </aside>

@@ -89,7 +89,7 @@ const UserModal: React.FC<UserModalProps> = ({
                 className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none"
                 onClick={onClose}
               >
-                <span className="sr-only">Close</span>
+                <span className="sr-only">Fechar</span>
                 <X className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
@@ -97,7 +97,7 @@ const UserModal: React.FC<UserModalProps> = ({
             <form onSubmit={handleSubmit} className="mt-4 space-y-4">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                  Name
+                  Nome
                 </label>
                 <input
                   type="text"
@@ -155,9 +155,9 @@ const UserModal: React.FC<UserModalProps> = ({
                   onChange={handleChange}
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
                 >
-                  <option value="admin">Admin</option>
-                  <option value="tester">Tester</option>
-                  <option value="programmer">Programmer</option>
+                  <option value="admin">Administrador</option>
+                  <option value="tester">Testador</option>
+                  <option value="programmer">Programador</option>
                 </select>
               </div>
 
@@ -172,7 +172,7 @@ const UserModal: React.FC<UserModalProps> = ({
                     className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
                   <label htmlFor="active" className="ml-2 block text-sm text-gray-900">
-                    Active
+                    Ativado
                   </label>
                 </div>
               )}
@@ -189,7 +189,7 @@ const UserModal: React.FC<UserModalProps> = ({
                   className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
                   onClick={onClose}
                 >
-                  Cancel
+                  Cancelar
                 </button>
               </div>
             </form>

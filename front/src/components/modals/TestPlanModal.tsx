@@ -123,7 +123,7 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
                 className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none"
                 onClick={onClose}
               >
-                <span className="sr-only">Close</span>
+                <span className="sr-only">Fechar</span>
                 <X className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
@@ -131,7 +131,7 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
             <form onSubmit={handleSubmit} className="mt-4 space-y-4">
               <div>
                 <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-                  Test Plan Title
+                  Titulo do Plano de Teste
                 </label>
                 <input
                   type="text"
@@ -147,7 +147,7 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
 
               <div>
                 <label htmlFor="project" className="block text-sm font-medium text-gray-700">
-                  Project
+                  Projeto
                 </label>
                 <select
                   id="project"
@@ -157,7 +157,7 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
                   required
                   className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
                 >
-                  <option value="">Select Project</option>
+                  <option value="">Selecione Projeto</option>
                   {projectOptions.map(project => (
                     <option key={project} value={project}>
                       {project}
@@ -168,7 +168,7 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
 
               <div>
                 <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                  Description
+                  Descrição
                 </label>
                 <textarea
                   name="description"
@@ -184,7 +184,7 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">
-                    Start Date
+                    Data de inicio
                   </label>
                   <input
                     type="date"
@@ -199,7 +199,7 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
 
                 <div>
                   <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">
-                    End Date
+                    Data Final
                   </label>
                   <input
                     type="date"
@@ -216,7 +216,7 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
               {testPlan && (
                 <div>
                   <label htmlFor="progress" className="block text-sm font-medium text-gray-700">
-                    Progress ({formData.progress}%)
+                    Progresso ({formData.progress}%)
                   </label>
                   <input
                     type="range"
@@ -243,7 +243,7 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
                   className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
                   onClick={onClose}
                 >
-                  Cancel
+                  Cancelar
                 </button>
               </div>
             </form>

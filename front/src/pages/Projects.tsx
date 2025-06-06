@@ -122,7 +122,7 @@ const Projects: React.FC = () => {
     <div className="space-y-6">
       {/* Header with actions */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
-        <h2 className="text-xl font-bold text-gray-900">Projects</h2>
+        <h2 className="text-xl font-bold text-gray-900">Projetos</h2>
         <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
@@ -140,7 +140,7 @@ const Projects: React.FC = () => {
               className="flex items-center justify-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
             >
               <Plus size={18} className="mr-1" />
-              New Project
+              Novo Projeto
             </button>
           )}
         </div>

@@ -10,17 +10,17 @@ const Reports: React.FC = () => {
   const [reportGenerated, setReportGenerated] = useState(false);
 
   const projectOptions = [
-    { value: 'all', label: 'All Projects' },
+    { value: 'all', label: 'Todos os Projetos' },
     { value: 'Gerenciamento de Teste', label: 'Gerenciamento de Teste' },
     { value: 'Sistema de Pagamentos', label: 'Sistema de Pagamentos' },
     { value: 'Portal de Atendimento', label: 'Portal de Atendimento' }
   ];
 
   const reportTypes = [
-    { value: 'test-results', label: 'Test Results Summary' },
-    { value: 'defects', label: 'Defects Report' },
-    { value: 'progress', label: 'Test Progress Report' },
-    { value: 'coverage', label: 'Test Coverage Report' }
+    { value: 'test-results', label: 'Resumo dos resultados do teste' },
+    { value: 'defects', label: 'Relatorio de Defeitos' },
+    { value: 'progress', label: 'Relatorio do Progresso de Teste' },
+    { value: 'coverage', label: 'Reportar Teste de Cobertura' }
   ];
 
   const handleGenerateReport = () => {

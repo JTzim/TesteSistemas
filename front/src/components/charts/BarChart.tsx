@@ -32,16 +32,14 @@ const BarChart = () => {
     return <div className="text-center text-red-500">Nenhum dado disponível.</div>;
   }
 
-  const maxValue = Math.max(...data.map(item => item.passed + item.failed + item.pending));
-
   return (
     <div className="w-full">
       <div className="flex flex-col space-y-4">
         {data.map((item, index) => {
           const total = item.passed + item.failed + item.pending || 1;
-          const passedWidth = (item.passed / maxValue) * 100;
-          const failedWidth = (item.failed / maxValue) * 100;
-          const pendingWidth = (item.pending / maxValue) * 100;
+          const passedWidth = (item.passed / total) * 100;
+          const failedWidth = (item.failed / total) * 100;
+          const pendingWidth = (item.pending / total) * 100;
 
           return (
             <div key={index} className="space-y-1">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Search, Edit, Trash, CheckCircle2 } from 'lucide-react';
+import { Plus, Search, Edit, CheckCircle2 } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import UserModal from '../components/modals/UserModal';
 
@@ -89,36 +89,6 @@ const UserManagement: React.FC = () => {
       console.error('Erro ao salvar usuário:', error);
     }
   };
-
-
- const handleDeleteUser = async (user: User, name: string, userId: string) => {
-  if (!isAdmin) return;
-
-  const confirmDelete = window.confirm("Tem certeza que deseja excluir este usuário?");
-  if (!confirmDelete) return;
-
-  try {
-    const response = await fetch(`http://localhost:3000/deleteUser/${user.email}/${user.name}/${user.id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Erro ao excluir o usuário');
-    }
-
-  
-    setUsers(users.filter(u => u.email === user.email? user : u));
-    alert('Usuário excluído com sucesso!');
-  } catch (error) {
-    console.error('Erro ao excluir usuário:', error);
-    alert('Falha ao excluir o usuário. Tente novamente.');
-  }
-};
-
 
   const handleToggleActive = (id: string) => {
     if (!isAdmin) return;
@@ -249,12 +219,6 @@ const UserManagement: React.FC = () => {
                           className="text-indigo-600 hover:text-indigo-900"
                         >
                           <Edit size={18} />
-                        </button>
-                        <button
-                          onClick={() => handleDeleteUser(user, user.name, user.id)}
-                          className="text-red-600 hover:text-red-900"
-                        >
-                          <Trash size={18} />
                         </button>
                       </div>
                     </td>

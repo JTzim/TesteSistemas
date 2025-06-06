@@ -13,7 +13,7 @@ interface User {
 }
 
 const UserManagement: React.FC = () => {
-  const { isAdmin } = useAuth();
+  const { isAdmin, user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingUser, setEditingUser] = useState<User | null>(null);
@@ -56,35 +56,39 @@ const UserManagement: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleSaveUser = async (user: User) => {
-  try {
-    if (user.id) {
-      await fetch(`http://localhost:3000/editUser/${user.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-      });
-      setUsers(users.map(u => u.id === user.id ? user : u));
-    } else {
-      const newUser = {
-        ...user,
-        id: Math.random().toString(36).substr(2, 9),
-        createdAt: new Date().toISOString(),
-        active: true
-      };
-      await fetch(`http://localhost:3000/createUser`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newUser)
-      });
-      
-      setUsers([...users, newUser]);
+  const handleSaveUser = async (userData: User) => {
+    try {
+      if (userData.id) {
+        await fetch(`http://localhost:3000/editUser/${userData.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(userData)
+        });
+        setUsers(users.map(u => u.id === userData.id ? userData : u));
+      } else {
+        const newUser = {
+          ...userData,
+          id: Math.random().toString(36).substr(2, 9),
+          createdAt: new Date().toISOString(),
+          active: true
+        };
+        
+        await fetch(`http://localhost:3000/createUser`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            ...newUser,
+            createdBy: user?.id // ID do usuário logado
+          })
+        });
+        
+        setUsers([...users, newUser]);
+      }
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error('Erro ao salvar usuário:', error);
     }
-    setIsModalOpen(false);
-  } catch (error) {
-    console.error('Erro ao salvar usuário:', error);
-  }
-};
+  };
 
 
  const handleDeleteUser = async (user: User) => {

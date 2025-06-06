@@ -16,7 +16,6 @@ const loginUsuario = require('./routes/loginUsuario');
 const mockUsers = require('./routes/read/mockUsers');
 const createUser = require('./routes/create/createUser');
 const editUser = require('./routes/update/editUser');
-const deleteUser = require('./routes/delete/deleteUser');
 //Importação das rotas Project
 const createProject = require('./routes/create/createProject');
 const editProject = require('./routes/update/editProject');
@@ -48,9 +47,6 @@ app.use('/', createUser);
 
 //Rota para Editar usuário
 app.use('/', editUser);
-
-//Rota para Deletar usuário
-app.use('/', deleteUser);
 
 //Rota para Mostrar projetos
 app.use('/', mockProjects);

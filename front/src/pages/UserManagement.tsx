@@ -62,7 +62,7 @@ const UserManagement: React.FC = () => {
         await fetch(`http://localhost:3000/editUser/${userData.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(userData)
+          body: JSON.stringify({...userData, userId: user?.id || ''})
         });
         setUsers(users.map(u => u.id === userData.id ? userData : u));
       } else {

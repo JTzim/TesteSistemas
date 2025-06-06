@@ -81,7 +81,7 @@ const TestCases: React.FC = () => {
       await fetch(`http://localhost:3000/editTestCase/${testCase.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(testCase),
+        body: JSON.stringify({...testCase, userId: user?.id || ''}),
       });
 
       setTestCases(testCases.map(tc => tc.id === testCase.id ? testCase : tc));

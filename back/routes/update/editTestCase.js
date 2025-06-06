@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const TestCase = require('../../models/TestCase');
 const TestCaseStep = require('../../models/TestCaseStep');
+const RecentActivity = require('../../models/recentActivity');
 
 router.put('/editTestCase/:id', async (req, res) => {
-    const { title, description, steps, expected, status, category } = req.body;
+    const { title, description, steps, expected, status, category, userId } = req.body;
     const id = req.params.id;
 
     try {
@@ -28,6 +29,12 @@ router.put('/editTestCase/:id', async (req, res) => {
             });
         }
 
+        await RecentActivity.create({
+            id_user: userId,
+            action: `Atualizou o caso de teste: ${title}`,
+            time: new Date(),
+            status: 'pending'
+        })
         return res.status(200).json({ message: 'Caso de teste atualizado com sucesso.' });
     } catch (error) {
         console.error('Erro ao editar caso de teste:', error.message);

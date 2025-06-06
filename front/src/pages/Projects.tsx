@@ -67,7 +67,8 @@ const Projects: React.FC = () => {
         ...project,
         id: Math.random().toString(36).substr(2, 9),
         createdAt: new Date().toISOString(),
-        testCount: 0
+        testCount: 0,
+        userId: user?.id || ''
       };
 
       await fetch(`http://localhost:3000/createProject`, {

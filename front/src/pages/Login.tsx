@@ -23,8 +23,12 @@ const Login: React.FC = () => {
     try {
       await login(email, password);
       navigate('/dashboard');
-    } catch (error) {
-      toast.error('Email ou senha inválida');
+    } catch (error: any) {
+      if (error.message === 'Usuário inativo') {
+        toast.error('Sua conta está inativa. Entre em contato com o administrador.');
+      } else {
+        toast.error('Email ou senha inválida');
+      }
     } finally {
       setIsLoading(false);
     }

@@ -45,7 +45,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     });
   
     if (!response.ok) {
-      throw new Error('Invalid email or password');
+      const data = await response.json();
+      throw new Error(data.message);
     }
   
     const user = await response.json();

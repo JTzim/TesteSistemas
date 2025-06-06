@@ -11,6 +11,10 @@ router.post('/login', async (req, res) => {
         if (!user) {
             return res.status(401).json({ message: 'Usuário não encontrado' });
         }
+        
+        if(user.active === false){
+            return res.status(401).json({ message: 'Usuário inativo' });
+        }
 
         if (user.senha !== password) {
             return res.status(401).json({ message: 'Senha incorreta' });

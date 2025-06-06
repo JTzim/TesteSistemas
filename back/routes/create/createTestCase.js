@@ -39,7 +39,7 @@ router.post('/createTestCase', async(req,res)=>{
         id_user: user.id,
         action: `Criou um novo caso de teste: ${title}`,
         time: new Date(),
-        status: 'pending'
+        status: 'passed'
        })
        await Project.update({testCount: projects.testCount + 1},{where: {id: projects.id}})
        if(steps){

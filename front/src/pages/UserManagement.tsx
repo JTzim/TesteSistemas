@@ -78,7 +78,7 @@ const UserManagement: React.FC = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             ...newUser,
-            createdBy: user?.id // ID do usuário logado
+            createdBy: user?.id 
           })
         });
         
@@ -91,14 +91,14 @@ const UserManagement: React.FC = () => {
   };
 
 
- const handleDeleteUser = async (user: User) => {
+ const handleDeleteUser = async (user: User, name: string, userId: string) => {
   if (!isAdmin) return;
 
   const confirmDelete = window.confirm("Tem certeza que deseja excluir este usuário?");
   if (!confirmDelete) return;
 
   try {
-    const response = await fetch(`http://localhost:3000/deleteUser/${user.email}`, {
+    const response = await fetch(`http://localhost:3000/deleteUser/${user.email}/${user.name}/${user.id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -251,7 +251,7 @@ const UserManagement: React.FC = () => {
                           <Edit size={18} />
                         </button>
                         <button
-                          onClick={() => handleDeleteUser(user)}
+                          onClick={() => handleDeleteUser(user, user.name, user.id)}
                           className="text-red-600 hover:text-red-900"
                         >
                           <Trash size={18} />

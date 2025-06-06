@@ -16,7 +16,7 @@ CREATE TABLE users (
 insert into users values ('Bahia5988', 'caique', 'caiquevidal@gmail.com', 'admin', default,'1234567890' ,  '2025-05-19 14:32:45');
 
 
-select * from users;
+select * from recentActivity;
 
 -- Projetos
 CREATE TABLE projects (
@@ -28,6 +28,8 @@ CREATE TABLE projects (
     test_count INT DEFAULT 0
 );
 
+insert into projects values('qwertyuio','teste', 'erro ao salvar', '1.0.0', '2025-05-19 14:32:45', default);
+
 -- Casos de Teste
 CREATE TABLE test_cases (
     id char(9) PRIMARY KEY,
@@ -38,9 +40,11 @@ CREATE TABLE test_cases (
     category VARCHAR(100),
     project_id char(9),
     created_by char(9),
+    plan_id char(9),
     created_at DATETIME NOT NULL,
     FOREIGN KEY (project_id) REFERENCES projects(id),
-    FOREIGN KEY (created_by) REFERENCES users(id)
+    FOREIGN KEY (created_by) REFERENCES users(id),
+    FOREIGN KEY (plan_id) REFERENCES test_plans(id)
 );
 
 -- Passos dos Casos de Teste (normalizado)
@@ -65,4 +69,13 @@ CREATE TABLE test_plans (
     created_by char(9),
     FOREIGN KEY (project_id) REFERENCES projects(id),
     FOREIGN KEY (created_by) REFERENCES users(id)
+);
+
+create table recentActivity(
+	id int primary key auto_increment,
+    id_user char(9) not null,
+    action varchar(255),
+    time datetime not null,
+    status ENUM('pending', 'passed', 'failed') NOT NULL,
+	foreign key(id_user) references users(id)
 );

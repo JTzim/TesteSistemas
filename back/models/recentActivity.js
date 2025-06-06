@@ -1,4 +1,5 @@
 const { Sequelize, sequelize } = require('./database');
+const User = require('./Users');
 
 class RecentActivity extends Sequelize.Model {}
 
@@ -9,7 +10,7 @@ RecentActivity.init({
         autoIncrement: true
     },
     id_user: {
-        type: Sequelize.CHAR(9),
+        type: Sequelize.STRING(9),
         allowNull: false,
         references: {
             model: 'users',
@@ -32,6 +33,11 @@ RecentActivity.init({
     modelName: 'RecentActivity',
     tableName: 'recentActivity',
     timestamps: false
+});
+
+RecentActivity.belongsTo(User, {
+    foreignKey: 'id_user',
+    as: 'user'
 });
 
 module.exports = RecentActivity;

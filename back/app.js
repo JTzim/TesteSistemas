@@ -16,7 +16,6 @@ const loginUsuario = require('./routes/loginUsuario');
 const mockUsers = require('./routes/read/mockUsers');
 const createUser = require('./routes/create/createUser');
 const editUser = require('./routes/update/editUser');
-const deleteUser = require('./routes/delete/deleteUser');
 //Importação das rotas Project
 const createProject = require('./routes/create/createProject');
 const editProject = require('./routes/update/editProject');
@@ -34,6 +33,8 @@ const mockTestPlans = require('./routes/read/mockTestPlans');
 const createTestPlan = require('./routes/create/createTestPlan');
 const editTestPlan = require('./routes/update/editTestPlan');
 const deleteTestPlan = require('./routes/delete/deleteTestplan');
+//Importação das rotas RecentActivity
+const mockRecentActivity = require('./routes/read/mockRecentActivity');
 
 //Rota de Login de Usuários
 app.use('/', loginUsuario);
@@ -46,9 +47,6 @@ app.use('/', createUser);
 
 //Rota para Editar usuário
 app.use('/', editUser);
-
-//Rota para Deletar usuário
-app.use('/', deleteUser);
 
 //Rota para Mostrar projetos
 app.use('/', mockProjects);
@@ -91,6 +89,9 @@ app.use('/', countTest);
 
 //Rota para Mostrar as categorias  no gráfico
 app.use('/', countCategory);
+
+//Rota para Mostrar atividades recentes
+app.use('/', mockRecentActivity);
 
 app.listen(port, ()=>{
     console.log(`Servidor rodando http://localhost:${port}`)

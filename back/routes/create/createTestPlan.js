@@ -3,6 +3,7 @@ const router = express.Router();
 const TestPlan  =  require('../../models/TestPlan');
 const Project = require('../../models/Projects');
 const User = require('../../models/Users');
+const RecentActivity = require('../../models/recentActivity');
 
 router.post('/createTestPlan', async(req,res)=>{
     const {id, title, description, project, startDate, endDate, testCount, progress, createdBy, createdAt} = req.body
@@ -31,6 +32,12 @@ router.post('/createTestPlan', async(req,res)=>{
             createdBy: user.id
         }
         await TestPlan.create(newTestPlan);
+        await RecentActivity.create({
+            id_user: user.id,
+            action: `Criou um novo plano de teste: ${title}`,
+            time: new Date(),
+            status: 'passed'
+        })
         res.status(200).json({message: 'Plano de teste criado'}) 
     } catch (error) {
         res.status(503).json({message: error.message})

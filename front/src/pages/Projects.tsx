@@ -13,7 +13,7 @@ interface Project {
 }
 
 const Projects: React.FC = () => {
-  const { isAdmin } = useAuth();
+  const { isAdmin, user } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingProject, setEditingProject] = useState<Project | null>(null);
@@ -67,7 +67,8 @@ const Projects: React.FC = () => {
         ...project,
         id: Math.random().toString(36).substr(2, 9),
         createdAt: new Date().toISOString(),
-        testCount: 0
+        testCount: 0,
+        userId: user?.id || ''
       };
 
       await fetch(`http://localhost:3000/createProject`, {
@@ -85,33 +86,33 @@ const Projects: React.FC = () => {
     
   };
 
-  const handleDeleteProject = async(id: string) => {
+  const handleDeleteProject = async(id: string, name: string, userId: string) => {
     const confirmDelete = window.confirm("Tem certeza que deseja excluir este projeto?");
     if (!confirmDelete) return;
 
     try {
-    const response = await fetch(`http://localhost:3000/deleteProject/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+      const response = await fetch(`http://localhost:3000/deleteProject/${id}/${name}/${userId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Erro ao excluir o projeto');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Erro ao excluir o projeto');
+      }
+
+      setProjects(projects.filter(project => project.id !== id));
+      alert('Projeto excluído com sucesso!');
+    } catch (error) {
+      console.error('Erro ao excluir Projeto:', error);
+      alert('Falha ao excluir o Projeto. Tente novamente.');
     }
-
-    setProjects(projects.filter(project => project.id !== id));
-    alert('Projeto excluído com sucesso!');
-  } catch (error) {
-    console.error('Erro ao excluir Projeto:', error);
-    alert('Falha ao excluir o Projeto. Tente novamente.');
-  }
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+    return new Date(dateString).toLocaleDateString('pt-BR', {
       year: 'numeric',
       month: 'short',
       day: 'numeric'
@@ -204,7 +205,7 @@ const Projects: React.FC = () => {
                               <Edit size={18} />
                             </button>
                             <button 
-                              onClick={() => handleDeleteProject(project.id)}
+                              onClick={() => handleDeleteProject(project.id, project.name, user?.id || '')}
                               className="text-red-600 hover:text-red-900"
                             >
                               <Trash size={18} />

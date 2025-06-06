@@ -3,6 +3,7 @@ const router = express.Router();
 const TestCase = require('../../models/TestCase');
 const Project = require('../../models/Projects');
 const User = require('../../models/Users');
+const RecentActivity = require('../../models/recentActivity');
 const TestCaseStep = require('../../models/TestCaseStep');
 
 router.post('/createTestCase', async(req,res)=>{
@@ -34,6 +35,12 @@ router.post('/createTestCase', async(req,res)=>{
        }
        
        await TestCase.create(newTestCase);
+       await RecentActivity.create({
+        id_user: user.id,
+        action: `Criou um novo caso de teste: ${title}`,
+        time: new Date(),
+        status: 'passed'
+       })
        await Project.update({testCount: projects.testCount + 1},{where: {id: projects.id}})
        if(steps){
         createTestCaseStep(id, steps);

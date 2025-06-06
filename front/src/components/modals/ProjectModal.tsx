@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface Project {
   id: string;
@@ -18,19 +19,24 @@ interface ProjectModalProps {
 }
 
 const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, project }) => {
+  const { user } = useAuth();
   const [formData, setFormData] = useState({
     id: '',
     name: '',
     description: '',
     version: '',
     createdAt: '',
-    testCount: 0
+    testCount: 0,
+    userId: user?.id || ''
   });
 
   // Reset form when modal opens or project changes
   useEffect(() => {
     if (project) {
-      setFormData(project);
+      setFormData({
+        ...project,
+        userId: user?.id || ''
+      });
     } else {
       setFormData({
         id: '',
@@ -38,10 +44,11 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, pr
         description: '',
         version: '1.0.0',
         createdAt: '',
-        testCount: 0
+        testCount: 0,
+        userId: user?.id || ''
       });
     }
-  }, [project, isOpen]);
+  }, [project, isOpen, user]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;

@@ -81,7 +81,7 @@ const TestCases: React.FC = () => {
       await fetch(`http://localhost:3000/editTestCase/${testCase.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(testCase),
+        body: JSON.stringify({...testCase, userId: user?.id || ''}),
       });
 
       setTestCases(testCases.map(tc => tc.id === testCase.id ? testCase : tc));
@@ -110,12 +110,12 @@ const TestCases: React.FC = () => {
   }
 };
 
-  const handleDeleteTestCase = async (id: string) => {
+  const handleDeleteTestCase = async (id: string, name: string, userId: string) => {
   const confirmDelete = window.confirm("Tem certeza que deseja excluir este caso de teste?");
   if (!confirmDelete) return;
 
   try {
-    const response = await fetch(`http://localhost:3000/deleteTestCase/${id}`, {
+    const response = await fetch(`http://localhost:3000/deleteTestCase/${id}/${name}/${userId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -137,7 +137,7 @@ const TestCases: React.FC = () => {
 
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+    return new Date(dateString).toLocaleDateString('pt-BR', {
       year: 'numeric',
       month: 'short',
       day: 'numeric'
@@ -254,7 +254,7 @@ const TestCases: React.FC = () => {
                               <Edit size={18} />
                             </button>
                             <button
-                              onClick={() => handleDeleteTestCase(testCase.id)}
+                              onClick={() => handleDeleteTestCase(testCase.id, testCase.title, user?.id || '')}
                               className="text-red-600 hover:text-red-900"
                             >
                               <Trash size={18} />

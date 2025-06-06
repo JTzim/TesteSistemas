@@ -61,7 +61,7 @@ const TestPlans: React.FC = () => {
       await fetch(`http://localhost:3000/editTestPlan/${testPlan.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(testPlan),
+        body: JSON.stringify({...testPlan, userId: user?.id || ''}),
       });
 
       setTestPlans(testPlans.map(tp => tp.id === testPlan.id ? testPlan : tp));
@@ -92,12 +92,12 @@ const TestPlans: React.FC = () => {
 };
 
 
-  const handleDeleteTestPlan = async (id: string) => {
+  const handleDeleteTestPlan = async (id: string, name: string, userId: string) => {
   const confirmDelete = window.confirm("Tem certeza que deseja excluir este plano de teste?");
   if (!confirmDelete) return;
 
   try {
-    const response = await fetch(`http://localhost:3000/deleteTestPlan/${id}`, {
+    const response = await fetch(`http://localhost:3000/deleteTestPlan/${id}/${name}/${userId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -166,7 +166,7 @@ const TestPlans: React.FC = () => {
                           <Edit size={18} />
                         </button>
                         <button
-                          onClick={() => handleDeleteTestPlan(testPlan.id)}
+                          onClick={() => handleDeleteTestPlan(testPlan.id, testPlan.title, user?.id || '')}
                           className="text-red-600 hover:text-red-900"
                         >
                           <Trash size={18} />

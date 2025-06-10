@@ -28,15 +28,13 @@ const Layout: React.FC = () => {
 
   return (
     <div className="flex h-screen bg-gray-50">
-      {/* Mobile sidebar toggle */}
       <button
         className="lg:hidden fixed z-20 bottom-4 right-4 p-2 rounded-full bg-blue-600 text-white shadow-lg"
         onClick={() => setSidebarOpen(!sidebarOpen)}
       >
         {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
-
-      {/* Sidebar */}
+      
       <aside className={`
         fixed inset-y-0 left-0 z-10
         transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
@@ -46,8 +44,7 @@ const Layout: React.FC = () => {
       `}>
         <div className="flex items-center justify-between mb-10 pr-2">
           <div className="flex items-center">
-            <ClipboardList className="h-8 w-8 text-blue-400" />
-            <span className="ml-2 text-xl font-bold">TesteFlow</span>
+            <span className="ml-2 text-md font-bold">Fluxo de Tests</span>
           </div>
           <button 
             className="lg:hidden text-gray-300 hover:text-white" 
@@ -98,8 +95,7 @@ const Layout: React.FC = () => {
           </button>
         </div>
       </aside>
-
-      {/* Main content area */}
+      
       <div className="flex-1 flex flex-col overflow-hidden">
         <header className="bg-white shadow-sm h-16">
           <div className="px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center">

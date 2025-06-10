@@ -10,23 +10,22 @@ const Reports: React.FC = () => {
   const [reportGenerated, setReportGenerated] = useState(false);
 
   const projectOptions = [
-    { value: 'all', label: 'All Projects' },
+    { value: 'all', label: 'Todos os Projetos' },
     { value: 'Gerenciamento de Teste', label: 'Gerenciamento de Teste' },
     { value: 'Sistema de Pagamentos', label: 'Sistema de Pagamentos' },
     { value: 'Portal de Atendimento', label: 'Portal de Atendimento' }
   ];
 
   const reportTypes = [
-    { value: 'test-results', label: 'Test Results Summary' },
-    { value: 'defects', label: 'Defects Report' },
-    { value: 'progress', label: 'Test Progress Report' },
-    { value: 'coverage', label: 'Test Coverage Report' }
+    { value: 'test-results', label: 'Resumo dos resultados do teste' },
+    { value: 'defects', label: 'Relatorio de Defeitos' },
+    { value: 'progress', label: 'Relatorio do Progresso de Teste' },
+    { value: 'coverage', label: 'Reportar Teste de Cobertura' }
   ];
 
   const handleGenerateReport = () => {
     setIsGenerating(true);
     
-    // Simulate report generation
     setTimeout(() => {
       setIsGenerating(false);
       setReportGenerated(true);
@@ -34,8 +33,6 @@ const Reports: React.FC = () => {
   };
 
   const handleDownload = () => {
-    // In a real app, this would trigger a file download
-    alert('Report downloaded');
   };
 
   return (
@@ -133,7 +130,7 @@ const Reports: React.FC = () => {
               } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
             >
               <FileText className="mr-2 h-4 w-4" />
-              {isGenerating ? 'Generating...' : 'Generate Report'}
+              {isGenerating ? 'Generating...' : 'Gerar Relatório'}
             </button>
           </div>
         </div>

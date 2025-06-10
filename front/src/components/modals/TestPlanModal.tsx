@@ -37,8 +37,7 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
     progress: 0,
     createdBy: ''
   });
-
-  // Mock projects for the dropdown
+  
   const [projectOptions, setProjectOptions] = useState<string[]>([]);
 
   useEffect(() => {
@@ -60,8 +59,6 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
     }
   }, [isOpen]);
   
-
-  // Reset form when modal opens or testPlan changes
   useEffect(() => {
     if (testPlan) {
       setFormData(testPlan);
@@ -116,7 +113,7 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6">
             <div className="flex justify-between items-start">
               <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                {testPlan ? 'Edit Test Plan' : 'Create New Test Plan'}
+                {testPlan ? 'Editar Plano de Teste' : 'Adicionar Novo Plano de Teste '}
               </h3>
               <button
                 type="button"
@@ -140,7 +137,7 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
                   value={formData.title}
                   onChange={handleChange}
                   required
-                  placeholder="Enter test plan title"
+                  placeholder="Digite Título do Plano de Teste"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
@@ -176,7 +173,7 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
                   value={formData.description}
                   onChange={handleChange}
                   rows={3}
-                  placeholder="Enter test plan description"
+                  placeholder="Digite a Descrição do Plano de Teste"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
@@ -236,7 +233,7 @@ const TestPlanModal: React.FC<TestPlanModalProps> = ({
                   type="submit"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                 >
-                  {testPlan ? 'Update Test Plan' : 'Create Test Plan'}
+                  {testPlan ? 'Atualizar Plano de Teste' : 'Cadastrar Plano de Teste'}
                 </button>
                 <button
                   type="button"

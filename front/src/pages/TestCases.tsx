@@ -22,8 +22,7 @@ const TestCases: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [editingTestCase, setEditingTestCase] = useState<TestCase | null>(null);
-
-  // Mock data
+  
   const [testCases, setTestCases] = useState<TestCase[]>([]);
 
   useEffect(() => {
@@ -146,7 +145,6 @@ const TestCases: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header with actions */}
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-4 lg:space-y-0">
         <h2 className="text-xl font-bold text-gray-900">Casos de Testes</h2>
         <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
@@ -154,7 +152,7 @@ const TestCases: React.FC = () => {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
             <input
               type="text"
-              placeholder="Search test cases..."
+              placeholder="Pesquisar Casos de Teste..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -184,8 +182,7 @@ const TestCases: React.FC = () => {
           )}
         </div>
       </div>
-
-      {/* Test cases list */}
+      
       <div className="bg-white shadow rounded-lg overflow-hidden">
         {filteredTestCases.length > 0 ? (
           <div className="overflow-x-auto">
@@ -233,7 +230,9 @@ const TestCases: React.FC = () => {
                       <div className="flex items-center">
                         {getStatusIcon(testCase.status)}
                         <span className="ml-1 text-sm capitalize">
-                          {testCase.status}
+                        {testCase.status === "passed" && 'Passou'}
+                        {testCase.status === "pending" && 'Pendente'}
+                        {testCase.status === "failed" && 'Falhou'}
                         </span>
                       </div>
                     </td>

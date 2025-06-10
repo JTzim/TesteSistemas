@@ -17,8 +17,7 @@ const UserManagement: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingUser, setEditingUser] = useState<User | null>(null);
-
-  // Mock data
+  
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
@@ -110,11 +109,11 @@ const UserManagement: React.FC = () => {
 
   const getRoleBadgeClass = (role: string) => {
     switch (role) {
-      case 'admin':
+      case 'Administrador':
         return 'bg-purple-100 text-purple-800';
-      case 'tester':
+      case 'Testador':
         return 'bg-blue-100 text-blue-800';
-      case 'programmer':
+      case 'Programador':
         return 'bg-green-100 text-green-800';
       default:
         return 'bg-gray-100 text-gray-800';
@@ -134,7 +133,6 @@ const UserManagement: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header with actions */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
         <h2 className="text-xl font-bold text-gray-900">Gerenciamento de Usuários</h2>
         <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
@@ -157,8 +155,7 @@ const UserManagement: React.FC = () => {
           </button>
         </div>
       </div>
-
-      {/* Users list */}
+      
       <div className="bg-white shadow rounded-lg overflow-hidden">
         {filteredUsers.length > 0 ? (
           <div className="overflow-x-auto">

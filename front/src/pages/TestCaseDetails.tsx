@@ -30,7 +30,6 @@ const TestCaseDetails: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [newComment, setNewComment] = useState('');
 
-  // Mock history data
   const [history] = useState<TestHistory[]>([
     {
       id: '1',
@@ -49,8 +48,7 @@ const TestCaseDetails: React.FC = () => {
       notes: 'All validation issues resolved'
     }
   ]);
-
-  // Mock comments data
+  
   const [comments] = useState<Comment[]>([
     {
       id: '1',
@@ -104,8 +102,7 @@ const TestCaseDetails: React.FC = () => {
 
   const handleAddComment = () => {
     if (!newComment.trim()) return;
-
-    // In a real app, this would be an API call
+    
     const comment: Comment = {
       id: Math.random().toString(),
       userId: user?.id || '',
@@ -113,8 +110,7 @@ const TestCaseDetails: React.FC = () => {
       content: newComment,
       createdAt: new Date().toISOString()
     };
-
-    // Update comments state
+    
     comments.push(comment);
     setNewComment('');
     toast.success('Comment added successfully');
@@ -176,7 +172,6 @@ const TestCaseDetails: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
       <div className="bg-white rounded-lg shadow-sm p-6">
         <div className="flex justify-between items-start">
           <div>
@@ -213,10 +208,8 @@ const TestCaseDetails: React.FC = () => {
         </div>
       </div>
 
-      {/* Test Details */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
-          {/* Test Steps and Expected Results */}
           <div className="bg-white rounded-lg shadow-sm p-6">
             <h2 className="text-lg font-semibold text-gray-900 mb-4">Detalhes do Teste</h2>
             
@@ -239,8 +232,7 @@ const TestCaseDetails: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {/* Comments Section */}
+          
           <div className="bg-white rounded-lg shadow-sm p-6">
             <h2 className="text-lg font-semibold text-gray-900 flex items-center mb-4">
               <MessageSquare size={20} className="mr-2" />
@@ -276,8 +268,7 @@ const TestCaseDetails: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* Test History */}
+        
         <div className="bg-white rounded-lg shadow-sm p-6">
           <h2 className="text-lg font-semibold text-gray-900 flex items-center mb-4">
             <History size={20} className="mr-2" />

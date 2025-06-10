@@ -3,7 +3,6 @@ import { mockUsers } from './mockData';
 
 export const userService = {
   getUsers: async (): Promise<User[]> => {
-    // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 500));
     return [...mockUsers];
   },

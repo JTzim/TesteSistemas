@@ -29,8 +29,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, pr
     testCount: 0,
     userId: user?.id || ''
   });
-
-  // Reset form when modal opens or project changes
+  
   useEffect(() => {
     if (project) {
       setFormData({
@@ -73,7 +72,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, pr
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
             <div className="flex justify-between items-start">
               <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                {project ? 'Edit Project' : 'Adicione Novo Projeto'}
+                {project ? 'Editar Projeto' : 'Adicionar Novo Projeto'}
               </h3>
               <button
                 type="button"
@@ -97,7 +96,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, pr
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  placeholder="Enter project name"
+                  placeholder="Digite o Nome do Projeto"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
@@ -112,7 +111,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, pr
                   value={formData.description}
                   onChange={handleChange}
                   rows={3}
-                  placeholder="Enter project description"
+                  placeholder="Digite a Descrição do Projeto"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
@@ -141,7 +140,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, pr
                   type="submit"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                 >
-                  {project ? 'Update Project' : 'Create Project'}
+                  {project ? 'Update Project' : 'Cadastrar o Projeto'}
                 </button>
                 <button
                   type="button"

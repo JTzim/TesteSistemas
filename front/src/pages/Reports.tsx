@@ -26,7 +26,6 @@ const Reports: React.FC = () => {
   const handleGenerateReport = () => {
     setIsGenerating(true);
     
-    // Simulate report generation
     setTimeout(() => {
       setIsGenerating(false);
       setReportGenerated(true);
@@ -34,8 +33,6 @@ const Reports: React.FC = () => {
   };
 
   const handleDownload = () => {
-    // In a real app, this would trigger a file download
-    alert('Report downloaded');
   };
 
   return (
@@ -133,7 +130,7 @@ const Reports: React.FC = () => {
               } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500`}
             >
               <FileText className="mr-2 h-4 w-4" />
-              {isGenerating ? 'Generating...' : 'Generate Report'}
+              {isGenerating ? 'Generating...' : 'Gerar Relatório'}
             </button>
           </div>
         </div>

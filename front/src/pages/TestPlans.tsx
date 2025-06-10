@@ -20,8 +20,7 @@ const TestPlans: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingTestPlan, setEditingTestPlan] = useState<TestPlan | null>(null);
-
-  // Mock data
+  
   const [testPlans, setTestPlans] = useState<TestPlan[]>([]);
 
   useEffect(() => {
@@ -119,7 +118,6 @@ const TestPlans: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header with actions */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
         <h2 className="text-xl font-bold text-gray-900">Planos de Teste</h2>
         <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
@@ -144,8 +142,7 @@ const TestPlans: React.FC = () => {
           )}
         </div>
       </div>
-
-      {/* Test plans list */}
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredTestPlans.length > 0 ? (
           filteredTestPlans.map((testPlan) => (

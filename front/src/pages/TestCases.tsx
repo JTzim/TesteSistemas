@@ -22,8 +22,7 @@ const TestCases: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [editingTestCase, setEditingTestCase] = useState<TestCase | null>(null);
-
-  // Mock data
+  
   const [testCases, setTestCases] = useState<TestCase[]>([]);
 
   useEffect(() => {
@@ -146,7 +145,6 @@ const TestCases: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header with actions */}
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center space-y-4 lg:space-y-0">
         <h2 className="text-xl font-bold text-gray-900">Casos de Testes</h2>
         <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
@@ -184,8 +182,7 @@ const TestCases: React.FC = () => {
           )}
         </div>
       </div>
-
-      {/* Test cases list */}
+      
       <div className="bg-white shadow rounded-lg overflow-hidden">
         {filteredTestCases.length > 0 ? (
           <div className="overflow-x-auto">
@@ -233,7 +230,9 @@ const TestCases: React.FC = () => {
                       <div className="flex items-center">
                         {getStatusIcon(testCase.status)}
                         <span className="ml-1 text-sm capitalize">
-                          {testCase.status}
+                        {testCase.status === "passed" && 'Passou'}
+                        {testCase.status === "pending" && 'Pendente'}
+                        {testCase.status === "failed" && 'Falhou'}
                         </span>
                       </div>
                     </td>

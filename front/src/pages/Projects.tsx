@@ -17,8 +17,7 @@ const Projects: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingProject, setEditingProject] = useState<Project | null>(null);
-
-  // Mock data
+  
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
@@ -121,7 +120,6 @@ const Projects: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header with actions */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
         <h2 className="text-xl font-bold text-gray-900">Projetos</h2>
         <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
@@ -146,8 +144,7 @@ const Projects: React.FC = () => {
           )}
         </div>
       </div>
-
-      {/* Projects list */}
+      
       <div className="bg-white shadow rounded-lg overflow-hidden">
         {filteredProjects.length > 0 ? (
           <div className="overflow-x-auto">

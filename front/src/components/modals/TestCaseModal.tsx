@@ -36,7 +36,6 @@ const TestCaseModal: React.FC<TestCaseModalProps> = ({ isOpen, onClose, onSave, 
     createdAt: ''
   });
 
-  // Mock projects and categories for the dropdown
   const [projectOptions, setProjectOptions] = useState<string[]>([]);
   const categoryOptions = ['Cadastro', 'Validação', 'Autenticação', 'Relatórios', 'Integração'];
 
@@ -60,12 +59,10 @@ useEffect(() => {
 }, [isOpen]);
 
 
-  // Reset form when modal opens or testCase changes
   useEffect(() => {
     if (testCase) {
       setFormData({
         ...testCase,
-        // Make sure steps is always an array
         steps: Array.isArray(testCase.steps) ? testCase.steps : ['']
       });
     } else {
@@ -108,7 +105,6 @@ useEffect(() => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Filter out any empty steps before saving
     const cleanedSteps = formData.steps.filter(step => step.trim() !== '');
     onSave({
       ...formData,
@@ -129,7 +125,7 @@ useEffect(() => {
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6">
             <div className="flex justify-between items-start">
               <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                {testCase ? 'Edit Test Case' : 'Adicione Novo Caso de Teste'}
+                {testCase ? 'Editar Caso de Teste' : 'Adicionar Novo Caso de Teste'}
               </h3>
               <button
                 type="button"

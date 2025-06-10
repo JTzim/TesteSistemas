@@ -46,7 +46,7 @@ const BarChart = () => {
               <div className="flex justify-between">
                 <span className="text-sm font-medium text-gray-700">{item.name}</span>
                 <span className="text-sm text-gray-500">
-                  {total} tests
+                  {total} testes
                 </span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-3">
@@ -66,9 +66,9 @@ const BarChart = () => {
                 </div>
               </div>
               <div className="flex justify-between text-xs">
-                <span className="text-green-600">{item.passed} passed</span>
-                <span className="text-red-600">{item.failed} failed</span>
-                <span className="text-amber-600">{item.pending} pending</span>
+                <span className="text-green-600">{item.passed} passou</span>
+                <span className="text-red-600">{item.failed} falhou</span>
+                <span className="text-amber-600">{item.pending} pendente</span>
               </div>
             </div>
           );

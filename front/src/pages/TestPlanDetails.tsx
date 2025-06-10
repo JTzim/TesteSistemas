@@ -23,8 +23,7 @@ const TestPlanDetails: React.FC = () => {
   const [testCases, setTestCases] = useState<TestCase[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  // Mock comments data
+  
   const [comments] = useState<Comment[]>([
     {
       id: '1',
@@ -127,7 +126,6 @@ const TestPlanDetails: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
       <div className="bg-white rounded-lg shadow-sm p-6">
         <div className="flex justify-between items-start">
           <div>
@@ -171,8 +169,7 @@ const TestPlanDetails: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Test Cases */}
+      
       <div className="bg-white rounded-lg shadow-sm">
         <div className="px-6 py-4 border-b border-gray-200">
           <h2 className="text-lg font-semibold text-gray-900">Casos de Teste</h2>
@@ -205,8 +202,7 @@ const TestPlanDetails: React.FC = () => {
                         <p className="text-gray-600">{testCase.expected}</p>
                       </div>
                     </div>
-
-                    {/* Comments Section */}
+                    
                     <div className="mt-6">
                       <h4 className="font-medium text-gray-700 flex items-center">
                         <MessageSquare size={16} className="mr-1" />
@@ -228,7 +224,6 @@ const TestPlanDetails: React.FC = () => {
                           ))}
                       </div>
                       
-                      {/* Comment Input */}
                       <div className="mt-3">
                         <textarea
                           placeholder="Add a comment..."

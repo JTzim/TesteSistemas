@@ -18,7 +18,7 @@ User.init({
         unique: true
     },
     role: {
-        type: Sequelize.ENUM('admin', 'tester', 'programmer'),
+        type: Sequelize.ENUM('admin', 'tester', 'programmer', 'gestor', 'avaliador'),
         allowNull: false
     },
     active: {

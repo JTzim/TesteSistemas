@@ -7,7 +7,7 @@ CREATE TABLE users (
     id char(9) PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    role ENUM('admin', 'tester', 'programmer') NOT NULL,
+    role ENUM('admin', 'tester', 'programmer', 'gestor', 'avaliador') NOT NULL,
     active BOOLEAN DEFAULT TRUE,
     senha char(10),
     created_at DATETIME NOT NULL

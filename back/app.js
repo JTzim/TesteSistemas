@@ -43,6 +43,7 @@ const deleteAvaliacao = require('./routes/delete/deleteAvaliacao');
 //Importação das rotas CriterioAvaliacao
 const createCriterioAvaliacao = require('./routes/create/createCriterioAvaliacao');
 const mockCriterioAvaliacao = require('./routes/read/mockCriterioAvaliacao');
+const editCriterioAvaliacao = require('./routes/update/editCriterioAvaliacao');
 
 //Rota de Login de Usuários
 app.use('/', loginUsuario);
@@ -115,6 +116,9 @@ app.use('/', createCriterioAvaliacao);
 
 //Rota para Mostrar Critérios de Avaliação
 app.use('/', mockCriterioAvaliacao);
+
+//Rota para Editar Critérios de Avaliação
+app.use('/', editCriterioAvaliacao);
 
 app.listen(port, ()=>{
     console.log(`Servidor rodando http://localhost:${port}`)

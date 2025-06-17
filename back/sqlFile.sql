@@ -79,23 +79,3 @@ create table recentActivity(
     status ENUM('pending', 'passed', 'failed') NOT NULL,
 	foreign key(id_user) references users(id)
 );
-
-create table avaliacao(
-	id char(9) PRIMARY KEY,
-    title varchar(100) not null,
-    created_at DATETIME NOT NULL,
-	project_id char(9) not null,
-    created_by char(9) not null,
-    FOREIGN KEY (project_id) REFERENCES projects(id),
-    FOREIGN KEY (created_by) REFERENCES users(id)
-);
-
-create table criterioAvaliacao(
-	id int primary key auto_increment,
-    avaliador char(9) not null,
-    descricao varchar(500) not null,
-    criterio enum('Eficiência','Eficácia','Satisfação do Usuário', 'Aprendizado', 'Memorabilidade', 'Prevenção de Erros', 'Acessibilidade', 'Consistência e Padrões', 'Feedback', 'Flexibilidade','Segurança no uso','Usabilidade','Comunicabilidade') not null,
-    fk_avaliacao char(9) not null,
-    FOREIGN KEY (fk_avaliacao) REFERENCES avaliacao(id),
-    FOREIGN KEY (avaliador) REFERENCES users(id)
-);

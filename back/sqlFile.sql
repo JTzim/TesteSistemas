@@ -28,8 +28,6 @@ CREATE TABLE projects (
     test_count INT DEFAULT 0
 );
 
-insert into projects values('qwertyuio','teste', 'erro ao salvar', '1.0.0', '2025-05-19 14:32:45', default);
-
 -- Casos de Teste
 CREATE TABLE test_cases (
     id char(9) PRIMARY KEY,
@@ -103,9 +101,6 @@ create table criterioAvaliacao(
 );
 
 
-
-select a.id, coalesce(avg(c.nota), 0) as media from avaliacao a left join criterioAvaliacao c on c.fk_avaliacao = a.id group by a.id;
-
 DELIMITER //
 
 CREATE TRIGGER atualizar_media_avaliacao
@@ -116,17 +111,17 @@ BEGIN
     DECLARE totalCriterios INT;
     DECLARE novaMedia DOUBLE;
 
-    -- Soma todas as notas dos critérios da avaliação específica
+    
     SELECT SUM(nota), COUNT(*) INTO somaNotas, totalCriterios
     FROM criterioAvaliacao
     WHERE fk_avaliacao = NEW.fk_avaliacao;
 
-    -- Calcula a média
+    
     SET novaMedia = somaNotas / totalCriterios;
 
-    -- Atualiza a coluna "media" na tabela avaliacao
+    
     UPDATE avaliacao
-    SET media = novaMedia
+    SET media = round(novaMedia, 2)
     WHERE id = NEW.fk_avaliacao;
 END;
 //

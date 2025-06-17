@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Avaliacao = require('../../models/avaliacao');
-const Projeto = require('../../models/project');
-const User = require('../../models/Users');
+const { Avaliacao, Project, User } = require('../../models/associations');
 
 // Rota para obter todas as avaliações
 router.get('/mockAvaliacoes', async (req, res) => {
@@ -10,11 +8,13 @@ router.get('/mockAvaliacoes', async (req, res) => {
     const avaliacoes = await Avaliacao.findAll({
       include: [
         {
-          model: Projeto,
+          model: Project,
+          as: 'Project',
           attributes: ['name']
         },
         {
           model: User,
+          as: 'User',
           attributes: ['name']
         }
       ]
@@ -26,7 +26,7 @@ router.get('/mockAvaliacoes', async (req, res) => {
       createdAt: avaliacao.createdAt,
       projectId: avaliacao.projectId,
       createdBy: avaliacao.createdBy,
-      projectName: avaliacao.Projeto?.name,
+      projectName: avaliacao.Project?.name,
       createdByName: avaliacao.User?.name
     }));
 

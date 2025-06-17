@@ -4,6 +4,7 @@ import { X } from 'lucide-react';
 interface Avaliacao {
   id: string;
   title: string;
+  media:number
   createdAt: string;
   projectId: string;
   createdBy: string;
@@ -28,6 +29,7 @@ const AvaliacaoModal: React.FC<AvaliacaoModalProps> = ({
     id: '',
     title: '',
     projectId: '',
+    media: 0,
     createdAt: '',
     createdBy: ''
   });
@@ -42,6 +44,7 @@ const AvaliacaoModal: React.FC<AvaliacaoModalProps> = ({
         id: '',
         title: '',
         projectId: projects[0]?.id || '',
+        media: 0,
         createdAt: '',
         createdBy: ''
       });

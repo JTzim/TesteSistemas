@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { Avaliacao, Project, User } = require('../../models/associations');
+const { Avaliacao, Project, User} = require('../../models/associations');
 
-// Rota para obter todas as avaliações
+
 router.get('/mockAvaliacoes', async (req, res) => {
   try {
     const avaliacoes = await Avaliacao.findAll({
@@ -20,16 +20,16 @@ router.get('/mockAvaliacoes', async (req, res) => {
       ]
     });
 
-    // Formata as avaliações para o formato esperado pelo frontend
+    
     const avaliacoesFormatadas = avaliacoes.map(avaliacao => ({
       id: avaliacao.id,
       title: avaliacao.title,
+      media: Math.round((avaliacao.media ?? 0) * 100) / 100,
       createdAt: avaliacao.createdAt,
       projectId: avaliacao.projectId,
       createdBy: avaliacao.createdBy,
       projectName: avaliacao.Project?.name,
       createdByName: avaliacao.User?.name,
-      // Adiciona o campo name para o select
       name: avaliacao.title
     }));
 

@@ -10,8 +10,7 @@ const Login: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { login, isAuthenticated } = useAuth();
-
-  // Redirect if already logged in
+  
   if (isAuthenticated) {
     return <Navigate to="/dashboard" replace />;
   }

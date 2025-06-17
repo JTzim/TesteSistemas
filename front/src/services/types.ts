@@ -1,14 +1,12 @@
-// User Types
 export interface User {
   id: string;
   name: string;
   email: string;
-  role: 'admin' | 'tester' | 'programmer';
+  role: 'admin' | 'tester' | 'programmer' | 'gestor' | 'avaliador';
   active: boolean;
   createdAt: string;
 }
 
-// Project Types
 export interface Project {
   id: string;
   name: string;
@@ -18,7 +16,6 @@ export interface Project {
   testCount: number;
 }
 
-// Test Case Types
 export interface TestCase {
   id: string;
   title: string;
@@ -32,7 +29,6 @@ export interface TestCase {
   createdAt: string;
 }
 
-// Test Plan Types
 export interface TestPlan {
   id: string;
   title: string;

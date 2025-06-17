@@ -6,15 +6,14 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import TestCases from './pages/TestCases';
-import TestCaseDetails from './pages/TestCaseDetails';
 import TestPlans from './pages/TestPlans';
-import TestPlanDetails from './pages/TestPlanDetails';
-import Reports from './pages/Reports';
 import UserManagement from './pages/UserManagement';
+import Avaliacao from './pages/Avaliacao';
+import CriterioAvaliacao from './pages/CriterioAvaliacao';
 import ProtectedRoute from './components/ProtectedRoute';
 import Layout from './components/Layout';
 
-function App() {
+const App: React.FC = () => {
   return (
     <AuthProvider>
       <Router>
@@ -30,21 +29,48 @@ function App() {
         />
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<ProtectedRoute><Layout /></ProtectedRoute>}>
+          <Route path="/" element={<Layout />}>
             <Route index element={<Navigate to="/dashboard" replace />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="projects" element={<Projects />} />
-            <Route path="test-cases" element={<TestCases />} />
-            <Route path="test-cases/:id" element={<TestCaseDetails />} />
-            <Route path="test-plans" element={<TestPlans />} />
-            <Route path="test-plans/:id" element={<TestPlanDetails />} />
-            <Route path="reports" element={<Reports />} />
-            <Route path="users" element={<UserManagement />} />
+            <Route path="dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="projects" element={
+              <ProtectedRoute>
+                <Projects />
+              </ProtectedRoute>
+            } />
+            <Route path="test-cases" element={
+              <ProtectedRoute>
+                <TestCases />
+              </ProtectedRoute>
+            } />
+            <Route path="test-plans" element={
+              <ProtectedRoute>
+                <TestPlans />
+              </ProtectedRoute>
+            } />
+            <Route path="users" element={
+              <ProtectedRoute requiredRole="admin">
+                <UserManagement />
+              </ProtectedRoute>
+            } />
+            <Route path="avaliacao" element={
+              <ProtectedRoute requiredRole="gestor">
+                <Avaliacao />
+              </ProtectedRoute>
+            } />
+            <Route path="criterio-avaliacao" element={
+              <ProtectedRoute requiredRoles={['gestor', 'avaliador']}>
+                <CriterioAvaliacao />
+              </ProtectedRoute>
+            } />
           </Route>
         </Routes>
       </Router>
     </AuthProvider>
   );
-}
+};
 
 export default App;

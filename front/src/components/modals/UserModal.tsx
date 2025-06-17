@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 
-
 interface User {
   id: string;
   name: string;
   email: string;
-  role: 'admin' | 'tester' | 'programmer';
+  role: 'admin' | 'tester' | 'programmer' | 'gestor' | 'avaliador';
   active: boolean;
   createdAt: string;
 }
@@ -29,12 +28,11 @@ const UserModal: React.FC<UserModalProps> = ({
     name: '',
     email: '',
     password: '',
-    role: 'tester' as 'admin' | 'tester' | 'programmer',
+    role: 'tester' as 'admin' | 'tester' | 'programmer' | 'gestor' | 'avaliador',
     active: true,
     createdAt: ''
   });
-
-  // Reset form when modal opens or user changes
+  
   useEffect(() => {
     if (user) {
       setFormData({
@@ -83,7 +81,7 @@ const UserModal: React.FC<UserModalProps> = ({
           <div className="bg-white px-4 pt-5 pb-4 sm:p-6">
             <div className="flex justify-between items-start">
               <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                {user ? 'Edit User' : 'Add New User'}
+                {user ? 'Editar Usuário' : 'Cadastrar Novo Usuário'}
               </h3>
               <button
                 type="button"
@@ -107,7 +105,7 @@ const UserModal: React.FC<UserModalProps> = ({
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  placeholder="Enter user's full name"
+                  placeholder="Digite seu Nome Completo"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
@@ -123,14 +121,14 @@ const UserModal: React.FC<UserModalProps> = ({
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  placeholder="Enter email address"
+                  placeholder="Digite seu Email"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                  {user ? 'Password (leave blank to keep current)' : 'Password'}
+                <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
+                  {user ? 'Password (leave blank to keep current)' : 'Senha'}
                 </label>
                 <input
                   type="password"
@@ -138,8 +136,8 @@ const UserModal: React.FC<UserModalProps> = ({
                   id="password"
                   value={formData.password}
                   onChange={handleChange}
-                  required={!user} // Only required for new users
-                  placeholder={user ? '••••••••' : 'Enter password'}
+                  required={!user}
+                  placeholder={user ? '••••••••' : 'Digite a Senha'}
                   maxLength={10}
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
@@ -147,7 +145,7 @@ const UserModal: React.FC<UserModalProps> = ({
 
               <div>
                 <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-                  Role
+                  Cargo
                 </label>
                 <select
                   id="role"
@@ -159,6 +157,8 @@ const UserModal: React.FC<UserModalProps> = ({
                   <option value="admin">Administrador</option>
                   <option value="tester">Testador</option>
                   <option value="programmer">Programador</option>
+                  <option value="gestor">Gestor</option>
+                  <option value="avaliador">Avaliador</option>
                 </select>
               </div>
 
@@ -183,7 +183,7 @@ const UserModal: React.FC<UserModalProps> = ({
                   type="submit"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                 >
-                  {user ? 'Update User' : 'Create User'}
+                  {user ? 'Atualizar Usuário' : 'Cadastrar Usuário'}
                 </button>
                 <button
                   type="button"

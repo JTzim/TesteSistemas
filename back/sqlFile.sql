@@ -16,7 +16,7 @@ CREATE TABLE users (
 insert into users values ('Bahia5988', 'caique', 'caiquevidal@gmail.com', 'admin', default,'1234567890' ,  '2025-05-19 14:32:45');
 
 
-select * from recentActivity;
+select * from projects;
 
 -- Projetos
 CREATE TABLE projects (

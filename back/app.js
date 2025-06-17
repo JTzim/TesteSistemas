@@ -35,6 +35,16 @@ const editTestPlan = require('./routes/update/editTestPlan');
 const deleteTestPlan = require('./routes/delete/deleteTestplan');
 //Importação das rotas RecentActivity
 const mockRecentActivity = require('./routes/read/mockRecentActivity');
+//Importação das rotas Avaliacao
+const createAvaliacao = require('./routes/create/createAvaliacao');
+const mockAvaliacao = require('./routes/read/mockAvaliacao');
+const deleteAvaliacao = require('./routes/delete/deleteAvaliacao');
+
+//Importação das rotas CriterioAvaliacao
+const createCriterioAvaliacao = require('./routes/create/createCriterioAvaliacao');
+const mockCriterioAvaliacao = require('./routes/read/mockCriterioAvaliacao');
+const editCriterioAvaliacao = require('./routes/update/editCriterioAvaliacao');
+const deleteCriterioAvaliacao = require('./routes/delete/deleteCriterioAvaliacao');
 
 //Rota de Login de Usuários
 app.use('/', loginUsuario);
@@ -92,6 +102,27 @@ app.use('/', countCategory);
 
 //Rota para Mostrar atividades recentes
 app.use('/', mockRecentActivity);
+
+//Rota para Criar Avaliações
+app.use('/createAvaliacao', createAvaliacao);
+
+//Rota para Deletar Avaliações
+app.use('/', deleteAvaliacao);
+
+//Rota para Mostrar Avaliações
+app.use('/', mockAvaliacao);
+
+//Rota para Criar Critérios de Avaliação
+app.use('/', createCriterioAvaliacao);
+
+//Rota para Mostrar Critérios de Avaliação
+app.use('/', mockCriterioAvaliacao);
+
+//Rota para Editar Critérios de Avaliação
+app.use('/', editCriterioAvaliacao);
+
+//Rota para Deletar Critérios de Avaliação
+app.use('/', deleteCriterioAvaliacao);
 
 app.listen(port, ()=>{
     console.log(`Servidor rodando http://localhost:${port}`)

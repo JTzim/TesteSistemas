@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { LayoutDashboard, ClipboardList, FileSpreadsheet, BarChart2, Users, LogOut, Menu, X, BookOpen } from 'lucide-react';
+import { LayoutDashboard, ClipboardList, FileSpreadsheet, BarChart2, Users, LogOut, Menu, X, BookOpen, ClipboardCheck, ListChecks } from 'lucide-react';
 
 const Layout: React.FC = () => {
-  const { user, logout, isAdmin } = useAuth();
+  const { user, logout, isAdmin, isGestor, isAvaliador } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -18,9 +18,21 @@ const Layout: React.FC = () => {
     { path: '/dashboard', name: 'Dashboard', icon: <LayoutDashboard size={20} /> },
     { path: '/projects', name: 'Projetos', icon: <BookOpen size={20} /> },
     { path: '/test-cases', name: 'Casos de Teste', icon: <ClipboardList size={20} /> },
-    { path: '/test-plans', name: 'Planos de Teste', icon: <FileSpreadsheet size={20} /> },
-    { path: '/reports', name: 'Relatório', icon: <BarChart2 size={20} /> },
+    { path: '/test-plans', name: 'Planos de Teste', icon: <FileSpreadsheet size={20} /> }
   ];
+
+  if (isGestor) {
+    menuItems.push(
+      { path: '/avaliacao', name: 'Avaliações', icon: <ClipboardCheck size={20} /> },
+      { path: '/criterio-avaliacao', name: 'Critérios', icon: <ListChecks size={20} /> }
+    );
+  }
+
+  if (isAvaliador) {
+    menuItems.push(
+      { path: '/criterio-avaliacao', name: 'Critérios', icon: <ListChecks size={20} /> }
+    );
+  }
 
   if (isAdmin) {
     menuItems.push({ path: '/users', name: 'Usuários', icon: <Users size={20} /> });
@@ -28,15 +40,13 @@ const Layout: React.FC = () => {
 
   return (
     <div className="flex h-screen bg-gray-50">
-      {/* Mobile sidebar toggle */}
       <button
         className="lg:hidden fixed z-20 bottom-4 right-4 p-2 rounded-full bg-blue-600 text-white shadow-lg"
         onClick={() => setSidebarOpen(!sidebarOpen)}
       >
         {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
-
-      {/* Sidebar */}
+      
       <aside className={`
         fixed inset-y-0 left-0 z-10
         transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
@@ -46,8 +56,7 @@ const Layout: React.FC = () => {
       `}>
         <div className="flex items-center justify-between mb-10 pr-2">
           <div className="flex items-center">
-            <ClipboardList className="h-8 w-8 text-blue-400" />
-            <span className="ml-2 text-xl font-bold">TesteFlow</span>
+            <span className="ml-2 text-md font-bold">Fluxo de Tests</span>
           </div>
           <button 
             className="lg:hidden text-gray-300 hover:text-white" 
@@ -98,8 +107,7 @@ const Layout: React.FC = () => {
           </button>
         </div>
       </aside>
-
-      {/* Main content area */}
+      
       <div className="flex-1 flex flex-col overflow-hidden">
         <header className="bg-white shadow-sm h-16">
           <div className="px-4 sm:px-6 lg:px-8 h-full flex justify-between items-center">

@@ -1,35 +1,47 @@
 import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
+import { User, Bug, CheckCircle, Clock, ClipboardCheck, ListChecks } from 'lucide-react';
 
 interface StatCardProps {
   title: string;
-  value: string | number;
-  icon: React.ReactNode;
-  change?: string;
+  value: number;
+  icon?: 'users' | 'bugs' | 'success' | 'pending' | 'avaliacoes' | 'criterios';
+  description?: string;
 }
 
-const StatCard: React.FC<StatCardProps> = ({ title, value, icon, change }) => {
-  const isPositiveChange = change?.startsWith('+');
-  
+const StatCard: React.FC<StatCardProps> = ({ title, value, icon, description }) => {
+  const getIcon = () => {
+    switch (icon) {
+      case 'users':
+        return <User className="h-4 w-4 text-muted-foreground" />;
+      case 'bugs':
+        return <Bug className="h-4 w-4 text-muted-foreground" />;
+      case 'success':
+        return <CheckCircle className="h-4 w-4 text-muted-foreground" />;
+      case 'pending':
+        return <Clock className="h-4 w-4 text-muted-foreground" />;
+      case 'avaliacoes':
+        return <ClipboardCheck className="h-4 w-4 text-muted-foreground" />;
+      case 'criterios':
+        return <ListChecks className="h-4 w-4 text-muted-foreground" />;
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow p-6 transition-all duration-300 hover:shadow-md">
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-sm font-medium text-gray-500">{title}</p>
-          <p className="mt-1 text-2xl font-semibold text-gray-900">{value}</p>
-          
-          {change && (
-            <p className={`mt-2 text-sm ${
-              isPositiveChange ? 'text-green-600' : 'text-red-600'
-            }`}>
-              {change}
-            </p>
-          )}
-        </div>
-        <div className="p-3 bg-gray-50 rounded-lg">
-          {icon}
-        </div>
-      </div>
-    </div>
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardTitle className="text-sm font-medium">{title}</CardTitle>
+        {getIcon()}
+      </CardHeader>
+      <CardContent>
+        <div className="text-2xl font-bold">{value}</div>
+        {description && (
+          <p className="text-xs text-muted-foreground">{description}</p>
+        )}
+      </CardContent>
+    </Card>
   );
 };
 

@@ -1,57 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
 
-interface Project {
+interface Avaliacao {
   id: string;
-  name: string;
-  description: string;
-  version: string;
+  title: string;
   createdAt: string;
-  testCount: number;
+  projectId: string;
+  createdBy: string;
 }
 
-interface ProjectModalProps {
+interface AvaliacaoModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (project: Project) => void;
-  project: Project | null;
+  onSave: (avaliacao: Avaliacao) => void;
+  avaliacao: Avaliacao | null;
+  projects: {id: string, name: string}[];
 }
 
-const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, project }) => {
-  const { user } = useAuth();
+const AvaliacaoModal: React.FC<AvaliacaoModalProps> = ({ 
+  isOpen, 
+  onClose, 
+  onSave, 
+  avaliacao,
+  projects 
+}) => {
   const [formData, setFormData] = useState({
     id: '',
-    name: '',
-    description: '',
-    version: '',
+    title: '',
+    projectId: '',
     createdAt: '',
-    testCount: 0,
-    userId: user?.id || ''
+    createdBy: ''
   });
-  
+
   useEffect(() => {
-    if (project) {
+    if (avaliacao) {
       setFormData({
-        ...project,
-        userId: user?.id || ''
+        ...avaliacao
       });
     } else {
       setFormData({
         id: '',
-        name: '',
-        description: '',
-        version: '1.0.0',
+        title: '',
+        projectId: projects[0]?.id || '',
         createdAt: '',
-        testCount: 0,
-        userId: user?.id || ''
+        createdBy: ''
       });
     }
-  }, [project, isOpen, user]);
+  }, [avaliacao, isOpen, projects]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const selectedProject = projects.find(p => p.id === value);
+    setFormData({ 
+      ...formData, 
+      [name]: value,
+      title: selectedProject ? `Ava - ${selectedProject.name}` : ''
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -69,10 +73,10 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, pr
         <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
         <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div className="bg-white px-4 pt-5 pb-4 sm:p-6">
             <div className="flex justify-between items-start">
               <h3 className="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                {project ? 'Editar Projeto' : 'Adicionar Novo Projeto'}
+                {avaliacao ? 'Editar Avaliação' : 'Nova Avaliação'}
               </h3>
               <button
                 type="button"
@@ -86,53 +90,38 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, pr
 
             <form onSubmit={handleSubmit} className="mt-4 space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                  Nome do Projeto
+                <label htmlFor="projectId" className="block text-sm font-medium text-gray-700">
+                  Projeto
                 </label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  value={formData.name}
+                <select
+                  id="projectId"
+                  name="projectId"
+                  value={formData.projectId}
                   onChange={handleChange}
                   required
-                  placeholder="Digite o Nome do Projeto"
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                />
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                >
+                  <option value="">Selecione um Projeto</option>
+                  {projects.map(project => (
+                    <option key={project.id} value={project.id}>
+                      {project.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div>
-                <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                  Descrição
-                </label>
-                <textarea
-                  name="description"
-                  id="description"
-                  value={formData.description}
-                  onChange={handleChange}
-                  rows={3}
-                  placeholder="Digite a Descrição do Projeto"
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="version" className="block text-sm font-medium text-gray-700">
-                  Versão
+                <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                  Título
                 </label>
                 <input
                   type="text"
-                  name="version"
-                  id="version"
-                  value={formData.version}
-                  onChange={handleChange}
-                  required
-                  placeholder="e.g., 1.0.0"
-                  pattern="^\d+\.\d+\.\d+$"
-                  title="Version should be in format: x.y.z (e.g., 1.0.0)"
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  id="title"
+                  name="title"
+                  value={formData.title}
+                  readOnly
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 bg-gray-50 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
                 />
-                <p className="mt-1 text-xs text-gray-500">Formato: x.y.z (e.g., 1.0.0)</p>
               </div>
 
               <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
@@ -140,7 +129,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, pr
                   type="submit"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                 >
-                  {project ? 'Update Project' : 'Cadastrar o Projeto'}
+                  {avaliacao ? 'Atualizar Avaliação' : 'Criar Avaliação'}
                 </button>
                 <button
                   type="button"
@@ -158,4 +147,4 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, onSave, pr
   );
 };
 
-export default ProjectModal;
+export default AvaliacaoModal; 

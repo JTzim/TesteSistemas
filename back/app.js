@@ -35,6 +35,9 @@ const editTestPlan = require('./routes/update/editTestPlan');
 const deleteTestPlan = require('./routes/delete/deleteTestplan');
 //Importação das rotas RecentActivity
 const mockRecentActivity = require('./routes/read/mockRecentActivity');
+//Importação das rotas Avaliacao
+const createAvaliacaoRouter = require('./routes/create/createAvaliacao');
+const mockAvaliacao = require('./routes/read/mockAvaliacao');
 
 //Rota de Login de Usuários
 app.use('/', loginUsuario);
@@ -92,6 +95,12 @@ app.use('/', countCategory);
 
 //Rota para Mostrar atividades recentes
 app.use('/', mockRecentActivity);
+
+//Rota para Criar Avaliações
+app.use('/createAvaliacao', createAvaliacaoRouter);
+
+//Rota para Mostrar Avaliações
+app.use('/', mockAvaliacao);
 
 app.listen(port, ()=>{
     console.log(`Servidor rodando http://localhost:${port}`)

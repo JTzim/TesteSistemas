@@ -82,6 +82,7 @@ create table recentActivity(
 
 create table avaliacao(
 	id char(9) PRIMARY KEY,
+    title varchar(100) not null,
     created_at DATETIME NOT NULL,
 	project_id char(9) not null,
     created_by char(9) not null,

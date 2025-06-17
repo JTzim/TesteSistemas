@@ -8,6 +8,10 @@ Avaliacao.init({
     allowNull: false,
     primaryKey: true
   },
+  title: {
+    type: Sequelize.STRING(100),
+    allowNull: false
+  },  
   createdAt: {
     type: Sequelize.DATE,
     allowNull: false,
@@ -16,20 +20,12 @@ Avaliacao.init({
   projectId: {
     type: Sequelize.STRING(9),
     allowNull: false,
-    field: 'project_id',
-    references: {
-      model: 'projects',
-      key: 'id'
-    }
+    field: 'project_id'
   },
   createdBy: {
     type: Sequelize.STRING(9),
     allowNull: false,
-    field: 'created_by',
-    references: {
-      model: 'users',
-      key: 'id'
-    }
+    field: 'created_by'
   }
 }, {
   sequelize,

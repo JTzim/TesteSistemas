@@ -37,7 +37,8 @@ CriterioAvaliacao.init({
   },
   fkAvaliacao: {
     type: Sequelize.STRING(9),
-    allowNull: false
+    allowNull: false,
+    field: 'fk_avaliacao'
   }
 }, {
   sequelize,

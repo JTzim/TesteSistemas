@@ -3,6 +3,7 @@ import { X } from 'lucide-react';
 
 interface Avaliacao {
   id: string;
+  title: string;
   createdAt: string;
   projectId: string;
   createdBy: string;
@@ -25,6 +26,7 @@ const AvaliacaoModal: React.FC<AvaliacaoModalProps> = ({
 }) => {
   const [formData, setFormData] = useState({
     id: '',
+    title: '',
     projectId: '',
     createdAt: '',
     createdBy: ''
@@ -38,6 +40,7 @@ const AvaliacaoModal: React.FC<AvaliacaoModalProps> = ({
     } else {
       setFormData({
         id: '',
+        title: '',
         projectId: projects[0]?.id || '',
         createdAt: '',
         createdBy: ''
@@ -47,7 +50,12 @@ const AvaliacaoModal: React.FC<AvaliacaoModalProps> = ({
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const selectedProject = projects.find(p => p.id === value);
+    setFormData({ 
+      ...formData, 
+      [name]: value,
+      title: selectedProject ? `Ava - ${selectedProject.name}` : ''
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -100,6 +108,20 @@ const AvaliacaoModal: React.FC<AvaliacaoModalProps> = ({
                     </option>
                   ))}
                 </select>
+              </div>
+
+              <div>
+                <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                  Título
+                </label>
+                <input
+                  type="text"
+                  id="title"
+                  name="title"
+                  value={formData.title}
+                  readOnly
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 bg-gray-50 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                />
               </div>
 
               <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">

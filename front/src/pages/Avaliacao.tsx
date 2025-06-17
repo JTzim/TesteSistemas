@@ -5,6 +5,7 @@ import AvaliacaoModal from '../components/modals/AvaliacaoModal';
 
 interface Avaliacao {
   id: string;
+  title: string;
   createdAt: string;
   projectId: string;
   createdBy: string;
@@ -179,6 +180,9 @@ const Avaliacao: React.FC = () => {
               <thead className="bg-gray-50">
                 <tr>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Título
+                  </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Projeto
                   </th>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -196,7 +200,10 @@ const Avaliacao: React.FC = () => {
                 {filteredAvaliacoes.map((avaliacao) => (
                   <tr key={avaliacao.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">{avaliacao.projectName}</div>
+                      <div className="text-sm font-medium text-gray-900">{avaliacao.title}</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{avaliacao.projectName}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">{avaliacao.createdByName}</div>

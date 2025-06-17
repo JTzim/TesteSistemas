@@ -1,7 +1,7 @@
 create DATABASE TesteSistema;
 USE TesteSistema ;
 
-
+select * from users;
 -- Usuários
 CREATE TABLE users (
     id char(9) PRIMARY KEY,
@@ -79,11 +79,12 @@ create table recentActivity(
     status ENUM('pending', 'passed', 'failed') NOT NULL,
 	foreign key(id_user) references users(id)
 );
-
+select * from avaliacao;
 create table avaliacao(
 	id char(9) PRIMARY KEY,
     title varchar(100) not null,
     created_at DATETIME NOT NULL,
+    media double,
 	project_id char(9) not null,
     created_by char(9) not null,
     FOREIGN KEY (project_id) REFERENCES projects(id),
@@ -94,8 +95,41 @@ create table criterioAvaliacao(
 	id int primary key auto_increment,
     avaliador char(9) not null,
     descricao varchar(500) not null,
+    nota int not null,
     criterio enum('Eficiência','Eficácia','Satisfação do Usuário', 'Aprendizado', 'Memorabilidade', 'Prevenção de Erros', 'Acessibilidade', 'Consistência e Padrões', 'Feedback', 'Flexibilidade','Segurança no uso','Usabilidade','Comunicabilidade') not null,
     fk_avaliacao char(9) not null,
     FOREIGN KEY (fk_avaliacao) REFERENCES avaliacao(id),
     FOREIGN KEY (avaliador) REFERENCES users(id)
 );
+
+
+
+select a.id, coalesce(avg(c.nota), 0) as media from avaliacao a left join criterioAvaliacao c on c.fk_avaliacao = a.id group by a.id;
+
+DELIMITER //
+
+CREATE TRIGGER atualizar_media_avaliacao
+AFTER INSERT ON criterioAvaliacao
+FOR EACH ROW
+BEGIN
+    DECLARE somaNotas DOUBLE;
+    DECLARE totalCriterios INT;
+    DECLARE novaMedia DOUBLE;
+
+    -- Soma todas as notas dos critérios da avaliação específica
+    SELECT SUM(nota), COUNT(*) INTO somaNotas, totalCriterios
+    FROM criterioAvaliacao
+    WHERE fk_avaliacao = NEW.fk_avaliacao;
+
+    -- Calcula a média
+    SET novaMedia = somaNotas / totalCriterios;
+
+    -- Atualiza a coluna "media" na tabela avaliacao
+    UPDATE avaliacao
+    SET media = novaMedia
+    WHERE id = NEW.fk_avaliacao;
+END;
+//
+
+DELIMITER ;
+

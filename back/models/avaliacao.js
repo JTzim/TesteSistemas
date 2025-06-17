@@ -12,6 +12,9 @@ Avaliacao.init({
     type: Sequelize.STRING(100),
     allowNull: false
   },  
+  media: {
+    type: Sequelize.DOUBLE
+  },
   createdAt: {
     type: Sequelize.DATE,
     allowNull: false,

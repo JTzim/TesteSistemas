@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { LayoutDashboard, ClipboardList, FileSpreadsheet, BarChart2, Users, LogOut, Menu, X, BookOpen } from 'lucide-react';
+import { LayoutDashboard, ClipboardList, FileSpreadsheet, BarChart2, Users, LogOut, Menu, X, BookOpen, ClipboardCheck, ListChecks } from 'lucide-react';
 
 const Layout: React.FC = () => {
-  const { user, logout, isAdmin } = useAuth();
+  const { user, logout, isAdmin, isGestor, isAvaliador } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -18,9 +18,21 @@ const Layout: React.FC = () => {
     { path: '/dashboard', name: 'Dashboard', icon: <LayoutDashboard size={20} /> },
     { path: '/projects', name: 'Projetos', icon: <BookOpen size={20} /> },
     { path: '/test-cases', name: 'Casos de Teste', icon: <ClipboardList size={20} /> },
-    { path: '/test-plans', name: 'Planos de Teste', icon: <FileSpreadsheet size={20} /> },
-    { path: '/reports', name: 'Relatório', icon: <BarChart2 size={20} /> },
+    { path: '/test-plans', name: 'Planos de Teste', icon: <FileSpreadsheet size={20} /> }
   ];
+
+  if (isGestor) {
+    menuItems.push(
+      { path: '/avaliacao', name: 'Avaliações', icon: <ClipboardCheck size={20} /> },
+      { path: '/criterio-avaliacao', name: 'Critérios', icon: <ListChecks size={20} /> }
+    );
+  }
+
+  if (isAvaliador) {
+    menuItems.push(
+      { path: '/criterio-avaliacao', name: 'Critérios', icon: <ListChecks size={20} /> }
+    );
+  }
 
   if (isAdmin) {
     menuItems.push({ path: '/users', name: 'Usuários', icon: <Users size={20} /> });

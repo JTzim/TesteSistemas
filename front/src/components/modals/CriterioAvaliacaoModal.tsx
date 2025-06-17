@@ -14,7 +14,7 @@ interface CriterioAvaliacaoModalProps {
   onClose: () => void;
   onSave: (criterio: CriterioAvaliacao) => void;
   criterio: CriterioAvaliacao | null;
-  avaliacoes: {id: string, name: string}[];
+  avaliacoes: {id: string, title: string}[];
 }
 
 const CriterioAvaliacaoModal: React.FC<CriterioAvaliacaoModalProps> = ({ 
@@ -151,7 +151,7 @@ const CriterioAvaliacaoModal: React.FC<CriterioAvaliacaoModalProps> = ({
                   <option value="">Selecione uma Avaliação</option>
                   {avaliacoes.map(avaliacao => (
                     <option key={avaliacao.id} value={avaliacao.id}>
-                      {avaliacao.name}
+                      {avaliacao.title}
                     </option>
                   ))}
                 </select>

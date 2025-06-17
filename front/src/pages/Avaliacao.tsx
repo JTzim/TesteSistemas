@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Search, Edit, Trash, Eye } from 'lucide-react';
+import { Plus, Search, Trash, Eye } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import AvaliacaoModal from '../components/modals/AvaliacaoModal';
 
@@ -17,8 +17,6 @@ const Avaliacao: React.FC = () => {
   const { user, isGestor } = useAuth();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [editingAvaliacao, setEditingAvaliacao] = useState<Avaliacao | null>(null);
-  
   const [avaliacoes, setAvaliacoes] = useState<Avaliacao[]>([]);
   const [projects, setProjects] = useState<{id: string, name: string}[]>([]);
 
@@ -68,36 +66,26 @@ const Avaliacao: React.FC = () => {
     avaliacao.createdByName?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleOpenModal = (avaliacao: Avaliacao | null = null) => {
-    setEditingAvaliacao(avaliacao);
+  const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
   const handleSaveAvaliacao = async (avaliacao: Avaliacao) => {
     try {
-      if (avaliacao.id) {
-        await fetch(`http://localhost:3000/editAvaliacao/${avaliacao.id}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(avaliacao)
-        });
-        setAvaliacoes(avaliacoes.map(a => a.id === avaliacao.id ? avaliacao : a));
-      } else {
-        const newAvaliacao = {
-          ...avaliacao,
-          id: Math.random().toString(36).substr(2, 9),
-          createdAt: new Date().toISOString(),
-          createdBy: user?.id || ''
-        };
+      const newAvaliacao = {
+        ...avaliacao,
+        id: Math.random().toString(36).substr(2, 9),
+        createdAt: new Date().toISOString(),
+        createdBy: user?.id || ''
+      };
 
-        await fetch(`http://localhost:3000/createAvaliacao`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newAvaliacao)
-        });
+      await fetch(`http://localhost:3000/createAvaliacao`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newAvaliacao)
+      });
 
-        setAvaliacoes([...avaliacoes, newAvaliacao]);
-      }
+      setAvaliacoes([...avaliacoes, newAvaliacao]);
       setIsModalOpen(false);
     } catch (error) {
       console.error('Erro ao salvar Avaliação:', error);
@@ -164,7 +152,7 @@ const Avaliacao: React.FC = () => {
             />
           </div>
           <button
-            onClick={() => handleOpenModal()}
+            onClick={handleOpenModal}
             className="flex items-center justify-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
           >
             <Plus size={18} className="mr-1" />
@@ -217,12 +205,6 @@ const Avaliacao: React.FC = () => {
                           <Eye size={18} />
                         </button>
                         <button
-                          onClick={() => handleOpenModal(avaliacao)}
-                          className="text-indigo-600 hover:text-indigo-900"
-                        >
-                          <Edit size={18} />
-                        </button>
-                        <button
                           onClick={() => handleDeleteAvaliacao(avaliacao.id)}
                           className="text-red-600 hover:text-red-900"
                         >
@@ -246,8 +228,8 @@ const Avaliacao: React.FC = () => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleSaveAvaliacao}
-        avaliacao={editingAvaliacao}
         projects={projects}
+        avaliacao={null}
       />
     </div>
   );

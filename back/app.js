@@ -39,6 +39,10 @@ const mockRecentActivity = require('./routes/read/mockRecentActivity');
 const createAvaliacaoRouter = require('./routes/create/createAvaliacao');
 const mockAvaliacao = require('./routes/read/mockAvaliacao');
 
+//Importação das rotas CriterioAvaliacao
+const createCriterioAvaliacao = require('./routes/create/createCriterioAvaliacao');
+const mockCriterioAvaliacao = require('./routes/read/mockCriterioAvaliacao');
+
 //Rota de Login de Usuários
 app.use('/', loginUsuario);
 
@@ -101,6 +105,12 @@ app.use('/createAvaliacao', createAvaliacaoRouter);
 
 //Rota para Mostrar Avaliações
 app.use('/', mockAvaliacao);
+
+//Rota para Criar Critérios de Avaliação
+app.use('/', createCriterioAvaliacao);
+
+//Rota para Mostrar Critérios de Avaliação
+app.use('/', mockCriterioAvaliacao);
 
 app.listen(port, ()=>{
     console.log(`Servidor rodando http://localhost:${port}`)

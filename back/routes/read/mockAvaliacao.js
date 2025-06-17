@@ -20,6 +20,7 @@ router.get('/mockAvaliacoes', async (req, res) => {
       ]
     });
 
+    // Formata as avaliações para o formato esperado pelo frontend
     const avaliacoesFormatadas = avaliacoes.map(avaliacao => ({
       id: avaliacao.id,
       title: avaliacao.title,
@@ -27,7 +28,9 @@ router.get('/mockAvaliacoes', async (req, res) => {
       projectId: avaliacao.projectId,
       createdBy: avaliacao.createdBy,
       projectName: avaliacao.Project?.name,
-      createdByName: avaliacao.User?.name
+      createdByName: avaliacao.User?.name,
+      // Adiciona o campo name para o select
+      name: avaliacao.title
     }));
 
     res.json(avaliacoesFormatadas);

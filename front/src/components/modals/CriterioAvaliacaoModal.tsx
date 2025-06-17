@@ -5,6 +5,7 @@ interface CriterioAvaliacao {
   id: number;
   avaliador: string;
   descricao: string;
+  nota: number;
   criterio: 'Eficiência' | 'Eficácia' | 'Satisfação do Usuário' | 'Aprendizado' | 'Memorabilidade' | 'Prevenção de Erros' | 'Acessibilidade' | 'Consistência e Padrões' | 'Feedback' | 'Flexibilidade' | 'Segurança no uso' | 'Usabilidade' | 'Comunicabilidade';
   fkAvaliacao: string;
 }
@@ -28,6 +29,7 @@ const CriterioAvaliacaoModal: React.FC<CriterioAvaliacaoModalProps> = ({
     id: 0,
     avaliador: '',
     descricao: '',
+    nota: 0,
     criterio: 'Eficiência' as CriterioAvaliacao['criterio'],
     fkAvaliacao: ''
   });
@@ -60,6 +62,7 @@ const CriterioAvaliacaoModal: React.FC<CriterioAvaliacaoModalProps> = ({
         id: 0,
         avaliador: '',
         descricao: '',
+        nota: 0,
         criterio: 'Eficiência',
         fkAvaliacao: avaliacoes[0]?.id || ''
       });
@@ -152,6 +155,24 @@ const CriterioAvaliacaoModal: React.FC<CriterioAvaliacaoModalProps> = ({
                   rows={3}
                   placeholder="Descreva o critério de avaliação"
                   className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="nota" className="block text-sm font-medium text-gray-700">
+                  Nota
+                </label>
+                <input
+                  name="nota"
+                  id="nota"
+                  value={formData.nota}
+                  type='number'
+                  max={10}
+                  min={0}
+                  onChange={handleChange}
+                  required
+                  placeholder="Avalie o critério"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
                 />
               </div>
 

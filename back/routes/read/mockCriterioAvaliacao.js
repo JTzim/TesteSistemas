@@ -4,7 +4,7 @@ const CriterioAvaliacao = require('../../models/criterioAvaliacao');
 const Avaliacao = require('../../models/avaliacao');
 const User = require('../../models/Users');
 
-// Rota para obter todos os critérios de avaliação
+
 router.get('/mockCriteriosAvaliacao', async (req, res) => {
   try {
     const criterios = await CriterioAvaliacao.findAll({
@@ -22,12 +22,13 @@ router.get('/mockCriteriosAvaliacao', async (req, res) => {
       ]
     });
 
-    // Formata os critérios para o formato esperado pelo frontend
+    
     const criteriosFormatados = criterios.map(criterio => ({
       id: criterio.id,
       avaliador: criterio.avaliador,
       descricao: criterio.descricao,
       criterio: criterio.criterio,
+      nota: criterio.nota,
       fkAvaliacao: criterio.fkAvaliacao,
       avaliadorName: criterio.userAvaliador?.name,
       avaliacaoName: criterio.avaliacao?.title

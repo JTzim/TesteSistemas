@@ -5,7 +5,7 @@ interface User {
   id: string;
   name: string;
   email: string;
-  role: 'admin' | 'tester' | 'programmer';
+  role: 'admin' | 'tester' | 'programmer' | 'gestor' | 'avaliador';
   active: boolean;
   createdAt: string;
 }
@@ -28,7 +28,7 @@ const UserModal: React.FC<UserModalProps> = ({
     name: '',
     email: '',
     password: '',
-    role: 'tester' as 'admin' | 'tester' | 'programmer',
+    role: 'tester' as 'admin' | 'tester' | 'programmer' | 'gestor' | 'avaliador',
     active: true,
     createdAt: ''
   });
@@ -157,6 +157,8 @@ const UserModal: React.FC<UserModalProps> = ({
                   <option value="admin">Administrador</option>
                   <option value="tester">Testador</option>
                   <option value="programmer">Programador</option>
+                  <option value="gestor">Gestor</option>
+                  <option value="avaliador">Avaliador</option>
                 </select>
               </div>
 

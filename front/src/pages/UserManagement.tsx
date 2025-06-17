@@ -7,7 +7,7 @@ interface User {
   id: string;
   name: string;
   email: string;
-  role: 'admin' | 'tester' | 'programmer';
+  role: 'admin' | 'tester' | 'programmer' | 'gestor' | 'avaliador';
   active: boolean;
   createdAt: string;
 }
@@ -115,6 +115,10 @@ const UserManagement: React.FC = () => {
         return 'bg-blue-100 text-blue-800';
       case 'Programador':
         return 'bg-green-100 text-green-800';
+      case 'Gestor':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'Avaliador':
+        return 'bg-red-100 text-red-800';
       default:
         return 'bg-gray-100 text-gray-800';
     }

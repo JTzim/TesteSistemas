@@ -4,7 +4,7 @@ type User = {
   id: string;
   name: string;
   email: string;
-  role: 'admin' | 'tester' | 'programmer';
+  role: 'admin' | 'tester' | 'programmer' | 'gestor' | 'avaliador';
 };
 
 type AuthContextType = {
@@ -15,6 +15,8 @@ type AuthContextType = {
   isAdmin: boolean;
   isTester: boolean;
   isProgrammer: boolean;
+  isGestor: boolean;
+  isAvaliador: boolean;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -69,6 +71,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     isAdmin: user?.role === 'admin',
     isTester: user?.role === 'tester',
     isProgrammer: user?.role === 'programmer',
+    isGestor: user?.role === 'gestor',
+    isAvaliador: user?.role === 'avaliador',
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

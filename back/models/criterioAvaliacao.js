@@ -13,6 +13,10 @@ CriterioAvaliacao.init({
     type: Sequelize.STRING(9),
     allowNull: false
   },
+  nota: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
   descricao: {
     type: Sequelize.STRING(500),
     allowNull: false

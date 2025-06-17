@@ -128,3 +128,31 @@ END;
 
 DELIMITER ;
 
+DELIMITER //
+
+CREATE TRIGGER atualizar_media_avaliacao_update
+AFTER UPDATE ON criterioAvaliacao
+FOR EACH ROW
+BEGIN
+    DECLARE somaNotas DOUBLE;
+    DECLARE totalCriterios INT;
+    DECLARE novaMedia DOUBLE;
+
+    
+    SELECT SUM(nota), COUNT(*) INTO somaNotas, totalCriterios
+    FROM criterioAvaliacao
+    WHERE fk_avaliacao = NEW.fk_avaliacao;
+
+
+    SET novaMedia = somaNotas / totalCriterios;
+
+
+    UPDATE avaliacao
+    SET media = ROUND(novaMedia, 2)
+    WHERE id = NEW.fk_avaliacao;
+END;
+//
+
+DELIMITER ;
+
+

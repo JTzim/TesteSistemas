@@ -7,6 +7,7 @@ interface CriterioAvaliacao {
   id: number;
   avaliador: string;
   descricao: string;
+  nota: number
   criterio: 'Eficiência' | 'Eficácia' | 'Satisfação do Usuário' | 'Aprendizado' | 'Memorabilidade' | 'Prevenção de Erros' | 'Acessibilidade' | 'Consistência e Padrões' | 'Feedback' | 'Flexibilidade' | 'Segurança no uso' | 'Usabilidade' | 'Comunicabilidade';
   fkAvaliacao: string;
   avaliadorName?: string;
@@ -189,6 +190,9 @@ const CriterioAvaliacao: React.FC = () => {
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Avaliação
                   </th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Nota
+                  </th>
                   <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Ações
                   </th>
@@ -208,6 +212,9 @@ const CriterioAvaliacao: React.FC = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">{criterio.avaliacaoName}</div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{criterio.nota}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="flex justify-end space-x-2">

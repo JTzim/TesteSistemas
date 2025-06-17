@@ -44,6 +44,7 @@ const deleteAvaliacao = require('./routes/delete/deleteAvaliacao');
 const createCriterioAvaliacao = require('./routes/create/createCriterioAvaliacao');
 const mockCriterioAvaliacao = require('./routes/read/mockCriterioAvaliacao');
 const editCriterioAvaliacao = require('./routes/update/editCriterioAvaliacao');
+const deleteCriterioAvaliacao = require('./routes/delete/deleteCriterioAvaliacao');
 
 //Rota de Login de Usuários
 app.use('/', loginUsuario);
@@ -119,6 +120,9 @@ app.use('/', mockCriterioAvaliacao);
 
 //Rota para Editar Critérios de Avaliação
 app.use('/', editCriterioAvaliacao);
+
+//Rota para Deletar Critérios de Avaliação
+app.use('/', deleteCriterioAvaliacao);
 
 app.listen(port, ()=>{
     console.log(`Servidor rodando http://localhost:${port}`)

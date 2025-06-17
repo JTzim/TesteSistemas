@@ -32,6 +32,8 @@ const CriterioAvaliacaoModal: React.FC<CriterioAvaliacaoModalProps> = ({
     fkAvaliacao: ''
   });
 
+  const [error, setError] = useState<string | null>(null);
+
   const criterioOptions: CriterioAvaliacao['criterio'][] = [
     'Eficiência',
     'Eficácia',
@@ -62,16 +64,27 @@ const CriterioAvaliacaoModal: React.FC<CriterioAvaliacaoModalProps> = ({
         fkAvaliacao: avaliacoes[0]?.id || ''
       });
     }
+    setError(null);
   }, [criterio, isOpen, avaliacoes]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    setError(null);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    try {
+      await onSave(formData);
+      setError(null);
+    } catch (error: any) {
+      if (error.response?.status === 400) {
+        setError(error.response.data.message);
+      } else {
+        setError('Erro ao salvar o critério. Tente novamente.');
+      }
+    }
   };
 
   if (!isOpen) return null;
@@ -98,6 +111,12 @@ const CriterioAvaliacaoModal: React.FC<CriterioAvaliacaoModalProps> = ({
                 <X className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
+
+            {error && (
+              <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md">
+                <p className="text-sm text-red-600">{error}</p>
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} className="mt-4 space-y-4">
               <div>

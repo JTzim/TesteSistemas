@@ -36,8 +36,9 @@ const deleteTestPlan = require('./routes/delete/deleteTestplan');
 //Importação das rotas RecentActivity
 const mockRecentActivity = require('./routes/read/mockRecentActivity');
 //Importação das rotas Avaliacao
-const createAvaliacaoRouter = require('./routes/create/createAvaliacao');
+const createAvaliacao = require('./routes/create/createAvaliacao');
 const mockAvaliacao = require('./routes/read/mockAvaliacao');
+const deleteAvaliacao = require('./routes/delete/deleteAvaliacao');
 
 //Importação das rotas CriterioAvaliacao
 const createCriterioAvaliacao = require('./routes/create/createCriterioAvaliacao');
@@ -101,7 +102,10 @@ app.use('/', countCategory);
 app.use('/', mockRecentActivity);
 
 //Rota para Criar Avaliações
-app.use('/createAvaliacao', createAvaliacaoRouter);
+app.use('/createAvaliacao', createAvaliacao);
+
+//Rota para Deletar Avaliações
+app.use('/', deleteAvaliacao);
 
 //Rota para Mostrar Avaliações
 app.use('/', mockAvaliacao);

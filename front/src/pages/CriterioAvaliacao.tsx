@@ -20,7 +20,7 @@ const CriterioAvaliacao: React.FC = () => {
   const [editingCriterio, setEditingCriterio] = useState<CriterioAvaliacao | null>(null);
   
   const [criterios, setCriterios] = useState<CriterioAvaliacao[]>([]);
-  const [avaliacoes, setAvaliacoes] = useState<{id: string, name: string}[]>([]);
+  const [avaliacoes, setAvaliacoes] = useState<{id: string, title: string}[]>([]);
 
   useEffect(() => {
     const fetchCriterios = async () => {
@@ -89,17 +89,24 @@ const CriterioAvaliacao: React.FC = () => {
           avaliador: user?.id || ''
         };
 
-        await fetch(`http://localhost:3000/createCriterioAvaliacao`, {
+        const response = await fetch(`http://localhost:3000/createCriterioAvaliacao`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newCriterio)
         });
 
-        setCriterios([...criterios, newCriterio]);
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw { response: { status: response.status, data: errorData } };
+        }
+
+        const savedCriterio = await response.json();
+        setCriterios([...criterios, savedCriterio]);
       }
       setIsModalOpen(false);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Erro ao salvar Critério:', error);
+      throw error;
     }
   };
 
